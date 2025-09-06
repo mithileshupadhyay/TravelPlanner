@@ -81,7 +81,7 @@ const AIAssistantCard: React.FC = () => {
     
     // Extract budget
     const budgetMatch = text.match(/\$(\d+)/);
-    const budget = budgetMatch ? `$${budgetMatch[1]}` : '$1500';
+    const budget = budgetMatch ? `₹${parseInt(budgetMatch[1]) * 80}` : '₹1,20,000';
     
     // Extract preferences
     const preferences = [];
@@ -115,7 +115,7 @@ const AIAssistantCard: React.FC = () => {
               activities: [
                 { period: 'morning', time: '09:00', title: 'Arrive in Tokyo', location: 'Narita Airport', duration: '2 hours', category: 'travel', icon: '✈️', cost: '$60', description: 'Land at Narita Airport → Take Airport Express to city center → Check into hotel', tips: 'Get a JR Pass for unlimited train travel throughout Japan' },
                 { period: 'afternoon', time: '14:00', title: 'Explore Asakusa District', location: 'Asakusa', duration: '3 hours', category: 'culture', icon: '⛩️', cost: 'Free', description: 'Visit ancient Senso-ji Temple → Walk through traditional Nakamise Shopping Street → Try taiyaki and ningyo-yaki snacks', tips: 'Best time for photos is late afternoon with golden light on the temple' },
-                { period: 'evening', time: '19:00', title: 'Authentic Ramen Experience', location: 'Shibuya', duration: '1.5 hours', category: 'food', icon: '🍜', cost: '$25', description: 'Dinner at famous Ichiran or Ippudo ramen shop → Experience Tokyo nightlife in Shibuya', tips: 'Try tonkotsu ramen - it\'s a local favorite, and don\'t be shy about slurping!' }
+                { period: 'evening', time: '19:00', title: 'Authentic Ramen Experience', location: 'Shibuya', duration: '1.5 hours', category: 'food', icon: '🍜', cost: '₹2,000', description: 'Dinner at famous Ichiran or Ippudo ramen shop → Experience Tokyo nightlife in Shibuya', tips: 'Try tonkotsu ramen - it\'s a local favorite, and don\'t be shy about slurping!' }
               ]
             },
             {
@@ -123,9 +123,9 @@ const AIAssistantCard: React.FC = () => {
               title: 'Modern Tokyo & Sky Views',
               theme: 'Skyscrapers, technology, and panoramic city views',
               activities: [
-                { period: 'morning', time: '09:00', title: 'Tokyo Skytree Experience', location: 'Sumida', duration: '2.5 hours', category: 'sightseeing', icon: '🗼', cost: '$30', description: 'Ascend Tokyo\'s tallest tower → 360° city views → Visit Skytree Town shopping complex', tips: 'Book tickets online to skip long queues, especially on weekends' },
-                { period: 'afternoon', time: '13:00', title: 'Tsukiji Outer Market Food Tour', location: 'Tsukiji', duration: '2 hours', category: 'food', icon: '🐟', cost: '$40', description: 'Fresh sushi breakfast → Street food sampling → Learn about Japanese culinary culture', tips: 'Go early for the freshest selections and try the famous tuna sashimi' },
-                { period: 'evening', time: '18:00', title: 'Shibuya Crossing & Shopping', location: 'Shibuya', duration: '2 hours', category: 'sightseeing', icon: '🚶', cost: '$20', description: 'Experience world\'s busiest crossing → Shopping at Shibuya 109 → Visit Hachiko statue', tips: 'Best crossing views from Starbucks overlooking the intersection' }
+                { period: 'morning', time: '09:00', title: 'Tokyo Skytree Experience', location: 'Sumida', duration: '2.5 hours', category: 'sightseeing', icon: '🗼', cost: '₹2,500', description: 'Ascend Tokyo\'s tallest tower → 360° city views → Visit Skytree Town shopping complex', tips: 'Book tickets online to skip long queues, especially on weekends' },
+                { period: 'afternoon', time: '13:00', title: 'Tsukiji Outer Market Food Tour', location: 'Tsukiji', duration: '2 hours', category: 'food', icon: '🐟', cost: '₹3,200', description: 'Fresh sushi breakfast → Street food sampling → Learn about Japanese culinary culture', tips: 'Go early for the freshest selections and try the famous tuna sashimi' },
+                { period: 'evening', time: '18:00', title: 'Shibuya Crossing & Shopping', location: 'Shibuya', duration: '2 hours', category: 'sightseeing', icon: '🚶', cost: '₹1,600', description: 'Experience world\'s busiest crossing → Shopping at Shibuya 109 → Visit Hachiko statue', tips: 'Best crossing views from Starbucks overlooking the intersection' }
               ]
             }
           ]
@@ -143,9 +143,9 @@ const AIAssistantCard: React.FC = () => {
               title: 'Iconic Paris Welcome',
               theme: 'Classic landmarks and Seine river magic',
               activities: [
-                { period: 'morning', time: '09:00', title: 'Eiffel Tower Experience', location: 'Champ de Mars', duration: '2.5 hours', category: 'sightseeing', icon: '🗼', cost: '$35', description: 'Ascend the Iron Lady → Panoramic Paris views → Photo session at Trocadéro Gardens', tips: 'Visit early morning to avoid crowds and get the best photos' },
-                { period: 'afternoon', time: '14:00', title: 'Seine River Cruise', location: 'Seine River', duration: '1.5 hours', category: 'romantic', icon: '🚢', cost: '$28', description: 'Romantic boat ride → See Paris from the water → Pass Notre-Dame and Louvre', tips: 'Choose a sunset cruise for the most romantic experience with champagne' },
-                { period: 'evening', time: '19:30', title: 'French Bistro Dinner', location: 'Latin Quarter', duration: '2 hours', category: 'food', icon: '🥖', cost: '$75', description: 'Authentic French cuisine → Wine pairing → Candlelit atmosphere at Le Procope', tips: 'Try coq au vin or bouillabaisse for a true French culinary experience' }
+                { period: 'morning', time: '09:00', title: 'Eiffel Tower Experience', location: 'Champ de Mars', duration: '2.5 hours', category: 'sightseeing', icon: '🗼', cost: '₹2,800', description: 'Ascend the Iron Lady → Panoramic Paris views → Photo session at Trocadéro Gardens', tips: 'Visit early morning to avoid crowds and get the best photos' },
+                { period: 'afternoon', time: '14:00', title: 'Seine River Cruise', location: 'Seine River', duration: '1.5 hours', category: 'romantic', icon: '🚢', cost: '₹2,300', description: 'Romantic boat ride → See Paris from the water → Pass Notre-Dame and Louvre', tips: 'Choose a sunset cruise for the most romantic experience with champagne' },
+                { period: 'evening', time: '19:30', title: 'French Bistro Dinner', location: 'Latin Quarter', duration: '2 hours', category: 'food', icon: '🥖', cost: '₹6,000', description: 'Authentic French cuisine → Wine pairing → Candlelit atmosphere at Le Procope', tips: 'Try coq au vin or bouillabaisse for a true French culinary experience' }
               ]
             },
             {
@@ -153,9 +153,9 @@ const AIAssistantCard: React.FC = () => {
               title: 'Art & Culture Immersion',
               theme: 'World-class museums and Parisian elegance',
               activities: [
-                { period: 'morning', time: '09:00', title: 'Louvre Museum Tour', location: 'Louvre', duration: '3 hours', category: 'culture', icon: '🎨', cost: '$20', description: 'See Mona Lisa → Venus de Milo → Egyptian antiquities → Skip-the-line access', tips: 'Book timed entry tickets online and focus on 2-3 wings to avoid overwhelm' },
-                { period: 'afternoon', time: '14:00', title: 'Champs-Élysées Stroll', location: 'Champs-Élysées', duration: '2 hours', category: 'shopping', icon: '🛍️', cost: '$50', description: 'Window shopping → Arc de Triomphe → Café culture experience', tips: 'Perfect for people-watching and enjoying French café culture' },
-                { period: 'evening', time: '19:00', title: 'Montmartre Evening', location: 'Montmartre', duration: '2.5 hours', category: 'culture', icon: '🎭', cost: '$30', description: 'Sacré-Cœur Basilica → Artist squares → Sunset views over Paris', tips: 'Take the funicular up the hill and stay for the magical sunset views' }
+                { period: 'morning', time: '09:00', title: 'Louvre Museum Tour', location: 'Louvre', duration: '3 hours', category: 'culture', icon: '🎨', cost: '₹1,600', description: 'See Mona Lisa → Venus de Milo → Egyptian antiquities → Skip-the-line access', tips: 'Book timed entry tickets online and focus on 2-3 wings to avoid overwhelm' },
+                { period: 'afternoon', time: '14:00', title: 'Champs-Élysées Stroll', location: 'Champs-Élysées', duration: '2 hours', category: 'shopping', icon: '🛍️', cost: '₹4,000', description: 'Window shopping → Arc de Triomphe → Café culture experience', tips: 'Perfect for people-watching and enjoying French café culture' },
+                { period: 'evening', time: '19:00', title: 'Montmartre Evening', location: 'Montmartre', duration: '2.5 hours', category: 'culture', icon: '🎭', cost: '₹2,400', description: 'Sacré-Cœur Basilica → Artist squares → Sunset views over Paris', tips: 'Take the funicular up the hill and stay for the magical sunset views' }
               ]
             }
           ]
@@ -174,8 +174,8 @@ const AIAssistantCard: React.FC = () => {
               theme: 'Palaces, guards, and British traditions',
               activities: [
                 { period: 'morning', time: '09:00', title: 'Buckingham Palace & Changing of Guard', location: 'Westminster', duration: '2 hours', category: 'culture', icon: '👑', cost: 'Free', description: 'Watch the famous ceremony → Explore St. James\'s Park → Royal photo opportunities', tips: 'Arrive early for the best viewing spots, ceremony happens at 11:00 AM' },
-                { period: 'afternoon', time: '13:00', title: 'Westminster Abbey & Big Ben', location: 'Westminster', duration: '2.5 hours', category: 'culture', icon: '⛪', cost: '$25', description: 'Royal wedding venue → Poets\' Corner → Crown Jewels nearby → Thames walk', tips: 'Audio guide included - don\'t miss the Coronation Chair' },
-                { period: 'evening', time: '18:00', title: 'Traditional Pub Experience', location: 'Covent Garden', duration: '2 hours', category: 'food', icon: '🍺', cost: '$40', description: 'Fish & chips → Local ales → Live music → British pub culture', tips: 'Try a proper pint of bitter and don\'t forget mushy peas with your fish & chips' }
+                { period: 'afternoon', time: '13:00', title: 'Westminster Abbey & Big Ben', location: 'Westminster', duration: '2.5 hours', category: 'culture', icon: '⛪', cost: '₹2,000', description: 'Royal wedding venue → Poets\' Corner → Crown Jewels nearby → Thames walk', tips: 'Audio guide included - don\'t miss the Coronation Chair' },
+                { period: 'evening', time: '18:00', title: 'Traditional Pub Experience', location: 'Covent Garden', duration: '2 hours', category: 'food', icon: '🍺', cost: '₹3,200', description: 'Fish & chips → Local ales → Live music → British pub culture', tips: 'Try a proper pint of bitter and don\'t forget mushy peas with your fish & chips' }
               ]
             }
           ]
@@ -193,9 +193,9 @@ const AIAssistantCard: React.FC = () => {
               title: 'Manhattan Highlights',
               theme: 'Iconic skylines and urban energy',
               activities: [
-                { period: 'morning', time: '09:00', title: 'Statue of Liberty & Ellis Island', location: 'Liberty Island', duration: '3 hours', category: 'sightseeing', icon: '🗽', cost: '$25', description: 'Ferry ride → Crown access → Immigration museum → Harbor views', tips: 'Book crown access tickets well in advance - they sell out quickly' },
+                { period: 'morning', time: '09:00', title: 'Statue of Liberty & Ellis Island', location: 'Liberty Island', duration: '3 hours', category: 'sightseeing', icon: '🗽', cost: '₹2,000', description: 'Ferry ride → Crown access → Immigration museum → Harbor views', tips: 'Book crown access tickets well in advance - they sell out quickly' },
                 { period: 'afternoon', time: '14:00', title: 'Central Park Exploration', location: 'Central Park', duration: '2 hours', category: 'nature', icon: '🌳', cost: 'Free', description: 'Bethesda Fountain → Bow Bridge → Strawberry Fields → People watching', tips: 'Rent a bike to cover more ground or enjoy a picnic lunch' },
-                { period: 'evening', time: '19:00', title: 'Times Square & Broadway', location: 'Times Square', duration: '2.5 hours', category: 'entertainment', icon: '🎭', cost: '$80', description: 'Bright lights → Street performers → Broadway show → NYC energy', tips: 'Book Broadway shows in advance or try same-day lottery tickets' }
+                { period: 'evening', time: '19:00', title: 'Times Square & Broadway', location: 'Times Square', duration: '2.5 hours', category: 'entertainment', icon: '🎭', cost: '₹6,400', description: 'Bright lights → Street performers → Broadway show → NYC energy', tips: 'Book Broadway shows in advance or try same-day lottery tickets' }
               ]
             }
           ]
@@ -213,9 +213,9 @@ const AIAssistantCard: React.FC = () => {
               title: 'Ubud Cultural Immersion',
               theme: 'Rice terraces, temples, and traditional arts',
               activities: [
-                { period: 'morning', time: '08:00', title: 'Tegallalang Rice Terraces', location: 'Ubud', duration: '2 hours', category: 'nature', icon: '🌾', cost: '$10', description: 'Stunning terraced landscapes → Traditional farming → Instagram-worthy photos', tips: 'Visit early morning for best lighting and fewer crowds' },
-                { period: 'afternoon', time: '13:00', title: 'Sacred Monkey Forest & Ubud Palace', location: 'Ubud Center', duration: '2.5 hours', category: 'culture', icon: '🐒', cost: '$5', description: 'Ancient temple complex → Playful monkeys → Royal palace architecture', tips: 'Keep bags closed - monkeys are very curious about food and shiny objects' },
-                { period: 'evening', time: '18:00', title: 'Traditional Balinese Dinner', location: 'Ubud', duration: '2 hours', category: 'food', icon: '🍛', cost: '$20', description: 'Nasi goreng → Satay → Tropical fruits → Cultural performance', tips: 'Try gado-gado and don\'t miss the traditional kecak fire dance' }
+                { period: 'morning', time: '08:00', title: 'Tegallalang Rice Terraces', location: 'Ubud', duration: '2 hours', category: 'nature', icon: '🌾', cost: '₹800', description: 'Stunning terraced landscapes → Traditional farming → Instagram-worthy photos', tips: 'Visit early morning for best lighting and fewer crowds' },
+                { period: 'afternoon', time: '13:00', title: 'Sacred Monkey Forest & Ubud Palace', location: 'Ubud Center', duration: '2.5 hours', category: 'culture', icon: '🐒', cost: '₹400', description: 'Ancient temple complex → Playful monkeys → Royal palace architecture', tips: 'Keep bags closed - monkeys are very curious about food and shiny objects' },
+                { period: 'evening', time: '18:00', title: 'Traditional Balinese Dinner', location: 'Ubud', duration: '2 hours', category: 'food', icon: '🍛', cost: '₹1,600', description: 'Nasi goreng → Satay → Tropical fruits → Cultural performance', tips: 'Try gado-gado and don\'t miss the traditional kecak fire dance' }
               ]
             }
           ]
@@ -233,9 +233,9 @@ const AIAssistantCard: React.FC = () => {
               title: 'Welcome to Mumbai!',
               theme: 'Arrival, settling in, and a taste of local life',
               activities: [
-                { period: 'morning', time: '09:00', title: 'Arrive in Mumbai', location: 'Mumbai Airport', duration: '2 hours', category: 'travel', icon: '✈️', cost: '$40', description: 'Check in at YMCA International House (affordable, family-friendly)', tips: 'YMCA offers clean, safe accommodation perfect for families' },
-                { period: 'afternoon', time: '14:00', title: 'Walk around Crawford Market', location: 'Crawford Market', duration: '2 hours', category: 'culture', icon: '🏪', cost: '$10', description: 'Try street snacks like vada pav and bhel puri → Explore local spices and fruits', tips: 'Bargain for better prices and try fresh fruit juices' },
-                { period: 'evening', time: '19:00', title: 'Dinner at Sukh Sagar', location: 'Marine Drive', duration: '1.5 hours', category: 'food', icon: '🍽️', cost: '$25', description: 'Vegetarian, family favorite → Stroll along Marine Drive for sunset', tips: 'Marine Drive is perfect for evening walks with kids' }
+                { period: 'morning', time: '09:00', title: 'Arrive in Mumbai', location: 'Mumbai Airport', duration: '2 hours', category: 'travel', icon: '✈️', cost: '₹3,200', description: 'Check in at YMCA International House (affordable, family-friendly)', tips: 'YMCA offers clean, safe accommodation perfect for families' },
+                { period: 'afternoon', time: '14:00', title: 'Walk around Crawford Market', location: 'Crawford Market', duration: '2 hours', category: 'culture', icon: '🏪', cost: '₹800', description: 'Try street snacks like vada pav and bhel puri → Explore local spices and fruits', tips: 'Bargain for better prices and try fresh fruit juices' },
+                { period: 'evening', time: '19:00', title: 'Dinner at Sukh Sagar', location: 'Marine Drive', duration: '1.5 hours', category: 'food', icon: '🍽️', cost: '₹2,000', description: 'Vegetarian, family favorite → Stroll along Marine Drive for sunset', tips: 'Marine Drive is perfect for evening walks with kids' }
               ]
             },
             {
@@ -243,9 +243,9 @@ const AIAssistantCard: React.FC = () => {
               title: 'Museums & Iconic Landmarks',
               theme: 'History, culture, and seaside fun',
               activities: [
-                { period: 'morning', time: '09:00', title: 'Visit Chhatrapati Shivaji Maharaj Vastu Sangrahalaya', location: 'Fort District', duration: '2.5 hours', category: 'culture', icon: '🏛️', cost: '$8', description: 'Prince of Wales Museum for an educational start → Ancient artifacts and art collections', tips: 'Great for kids to learn about Indian history and culture' },
-                { period: 'afternoon', time: '13:00', title: 'Gateway of India & Boat Ride', location: 'Colaba', duration: '2 hours', category: 'sightseeing', icon: '⛵', cost: '$15', description: 'Iconic monument → Optional boat ride to Elephanta Caves', tips: 'Take photos at the Gateway - it\'s Mumbai\'s most famous landmark' },
-                { period: 'evening', time: '17:00', title: 'Juhu Beach Family Time', location: 'Juhu', duration: '2 hours', category: 'relaxation', icon: '🏖️', cost: '$12', description: 'Beach activities → Street food → Watch sunset with family', tips: 'Try bhel puri and pav bhaji from beach vendors' }
+                { period: 'morning', time: '09:00', title: 'Visit Chhatrapati Shivaji Maharaj Vastu Sangrahalaya', location: 'Fort District', duration: '2.5 hours', category: 'culture', icon: '🏛️', cost: '₹640', description: 'Prince of Wales Museum for an educational start → Ancient artifacts and art collections', tips: 'Great for kids to learn about Indian history and culture' },
+                { period: 'afternoon', time: '13:00', title: 'Gateway of India & Boat Ride', location: 'Colaba', duration: '2 hours', category: 'sightseeing', icon: '⛵', cost: '₹1,200', description: 'Iconic monument → Optional boat ride to Elephanta Caves', tips: 'Take photos at the Gateway - it\'s Mumbai\'s most famous landmark' },
+                { period: 'evening', time: '17:00', title: 'Juhu Beach Family Time', location: 'Juhu', duration: '2 hours', category: 'relaxation', icon: '🏖️', cost: '₹960', description: 'Beach activities → Street food → Watch sunset with family', tips: 'Try bhel puri and pav bhaji from beach vendors' }
               ]
             }
           ]
@@ -262,9 +262,9 @@ const AIAssistantCard: React.FC = () => {
             title: `Welcome to ${destination}!`,
             theme: 'Arrival and first taste of local culture',
             activities: [
-              { period: 'morning', time: '09:00', title: `Arrive in ${destination}`, location: 'City Center', duration: '2 hours', category: 'travel', icon: '✈️', cost: '$50', description: `Check into accommodation → Get oriented with ${destination} → Local transportation setup`, tips: 'Research local transportation options and get a city map or app' },
-              { period: 'afternoon', time: '14:00', title: 'Historic City Center Tour', location: 'Old Town', duration: '3 hours', category: 'culture', icon: '🏛️', cost: '$25', description: 'Explore main historical sites → Local architecture → Cultural landmarks', tips: 'Join a free walking tour to get oriented and meet other travelers' },
-              { period: 'evening', time: '19:00', title: 'Traditional Local Dinner', location: 'Local Restaurant', duration: '1.5 hours', category: 'food', icon: '🍽️', cost: '$35', description: 'Authentic local cuisine → Regional specialties → Cultural dining experience', tips: 'Ask locals for restaurant recommendations for the most authentic experience' }
+              { period: 'morning', time: '09:00', title: `Arrive in ${destination}`, location: 'City Center', duration: '2 hours', category: 'travel', icon: '✈️', cost: '₹4,000', description: `Check into accommodation → Get oriented with ${destination} → Local transportation setup`, tips: 'Research local transportation options and get a city map or app' },
+              { period: 'afternoon', time: '14:00', title: 'Historic City Center Tour', location: 'Old Town', duration: '3 hours', category: 'culture', icon: '🏛️', cost: '₹2,000', description: 'Explore main historical sites → Local architecture → Cultural landmarks', tips: 'Join a free walking tour to get oriented and meet other travelers' },
+              { period: 'evening', time: '19:00', title: 'Traditional Local Dinner', location: 'Local Restaurant', duration: '1.5 hours', category: 'food', icon: '🍽️', cost: '₹2,800', description: 'Authentic local cuisine → Regional specialties → Cultural dining experience', tips: 'Ask locals for restaurant recommendations for the most authentic experience' }
             ]
           },
           {
@@ -272,9 +272,9 @@ const AIAssistantCard: React.FC = () => {
             title: 'Cultural Immersion',
             theme: 'Museums, art, and local traditions',
             activities: [
-              { period: 'morning', time: '09:00', title: 'Main Museum Visit', location: 'Cultural District', duration: '2.5 hours', category: 'culture', icon: '🎨', cost: '$20', description: 'Local history and art → Cultural exhibitions → Educational experience', tips: 'Check for free museum days or student discounts' },
-              { period: 'afternoon', time: '13:00', title: 'Local Market Exploration', location: 'Central Market', duration: '2 hours', category: 'shopping', icon: '🛍️', cost: '$30', description: 'Local crafts → Street food → Cultural shopping experience', tips: 'Bring cash and be prepared to bargain for better prices' },
-              { period: 'evening', time: '18:00', title: 'Scenic Viewpoint', location: 'City Overlook', duration: '2 hours', category: 'sightseeing', icon: '🌅', cost: '$15', description: 'Panoramic city views → Sunset photography → Relaxing evening', tips: 'Arrive 30 minutes before sunset for the best lighting' }
+              { period: 'morning', time: '09:00', title: 'Main Museum Visit', location: 'Cultural District', duration: '2.5 hours', category: 'culture', icon: '🎨', cost: '₹1,600', description: 'Local history and art → Cultural exhibitions → Educational experience', tips: 'Check for free museum days or student discounts' },
+              { period: 'afternoon', time: '13:00', title: 'Local Market Exploration', location: 'Central Market', duration: '2 hours', category: 'shopping', icon: '🛍️', cost: '₹2,400', description: 'Local crafts → Street food → Cultural shopping experience', tips: 'Bring cash and be prepared to bargain for better prices' },
+              { period: 'evening', time: '18:00', title: 'Scenic Viewpoint', location: 'City Overlook', duration: '2 hours', category: 'sightseeing', icon: '🌅', cost: '₹1,200', description: 'Panoramic city views → Sunset photography → Relaxing evening', tips: 'Arrive 30 minutes before sunset for the best lighting' }
             ]
           }
         ]
@@ -317,7 +317,7 @@ const AIAssistantCard: React.FC = () => {
       destination: itinerary.destination,
       startDate: new Date().toISOString().split('T')[0],
       endDate: new Date(Date.now() + parseInt(itinerary.duration) * 24 * 60 * 60 * 1000).toISOString().split('T')[0],
-      budget: parseInt(itinerary.budget.replace('$', '')),
+      budget: parseInt(itinerary.budget.replace('₹', '').replace(',', '')),
       preferences: ['AI Generated'],
       status: 'planned' as const,
       coverImage: 'https://images.pexels.com/photos/1371360/pexels-photo-1371360.jpeg?auto=compress&cs=tinysrgb&w=800',
