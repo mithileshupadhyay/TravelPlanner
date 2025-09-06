@@ -664,12 +664,16 @@ const AIAssistantCard: React.FC = () => {
             onKeyPress={(e) => e.key === 'Enter' && handleSendMessage()}
             placeholder="e.g., '5-day trip to Bali, $1200 budget, adventure'"
             className="flex-1 px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-xl bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 placeholder-gray-500 focus:ring-2 focus:ring-purple-500 focus:border-transparent text-sm"
+            disabled={isTyping}
           />
           <button
             onClick={toggleVoiceInput}
+            disabled={isTyping}
             className={`p-2 rounded-xl transition-colors ${
               isListening 
                 ? 'bg-red-600 text-white' 
+                : isTyping
+                ? 'bg-gray-300 dark:bg-gray-700 text-gray-400 cursor-not-allowed'
                 : 'bg-gray-200 dark:bg-gray-600 text-gray-600 dark:text-gray-300 hover:bg-gray-300 dark:hover:bg-gray-500'
             }`}
           >
@@ -677,8 +681,12 @@ const AIAssistantCard: React.FC = () => {
           </button>
           <button
             onClick={handleSendMessage}
-            disabled={!message.trim()}
-            className="p-2 bg-purple-600 text-white rounded-xl hover:bg-purple-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+            disabled={!message.trim() || isTyping}
+            className={`p-2 rounded-xl transition-colors ${
+              !message.trim() || isTyping
+                ? 'bg-gray-300 dark:bg-gray-700 text-gray-400 cursor-not-allowed'
+                : 'bg-purple-600 text-white hover:bg-purple-700'
+            }`}
           >
             <Send className="h-4 w-4" />
           </button>
