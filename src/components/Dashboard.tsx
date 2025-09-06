@@ -58,3 +58,5 @@ const HeroSection: React.FC = () => {
         
             <button className="group inline-flex items-center space-x-3 bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white px-8 py-4 rounded-2xl font-semibold text-lg transition-all duration-300 hover:shadow-2xl hover:shadow-blue-500/25 hover:-translate-y-1 transform">
 export default HeroSection;
+  )
+}
