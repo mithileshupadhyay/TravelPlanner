@@ -45,7 +45,7 @@ const AIAssistantCard: React.FC = () => {
   const [message, setMessage] = useState('');
   const [messages, setMessages] = useState<Message[]>([
     {
-      id: '1',
+      text: "Hello! I'm TravelYatri, your AI travel expert. I can help you plan trips to any destination. Just tell me where you want to go and for how many days.\n\nExample: \"Plan a 3-day trip to Paris\" or \"5-day Tokyo itinerary\"",
       text: "Hello! I'm TravelYatri, your personal travel expert. Just tell me where you want to go, when, and your budget - I'll create a complete itinerary for you instantly! For example: 'Plan a 5-day trip to Tokyo in March with a $2000 budget' or 'Weekend getaway to Paris, romantic, $800 budget'.",
       sender: 'assistant',
       timestamp: new Date()
