@@ -14,7 +14,8 @@ const HeroSection: React.FC = () => {
         <div className="absolute top-20 left-10 w-20 h-20 bg-blue-100 dark:bg-blue-900/30 rounded-full opacity-60 animate-pulse"></div>
         <div className="absolute top-40 right-20 w-16 h-16 bg-indigo-100 dark:bg-indigo-900/30 rounded-full opacity-40 animate-pulse" style={{ animationDelay: '1s' }}></div>
         <div className="absolute bottom-20 left-1/4 w-12 h-12 bg-purple-100 dark:bg-purple-900/30 rounded-full opacity-50 animate-pulse" style={{ animationDelay: '2s' }}></div>
-
+      </div>
+      
       <div className="relative z-10 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center">
           {/* Badge */}
