@@ -45,7 +45,6 @@ const AIAssistantCard: React.FC = () => {
   const [message, setMessage] = useState('');
   const [messages, setMessages] = useState<Message[]>([
     {
-      text: "Hello! I'm TravelYatri, your AI travel expert. I can help you plan trips to any destination. Just tell me where you want to go and for how many days.\n\nExample: \"Plan a 3-day trip to Paris\" or \"5-day Tokyo itinerary\"",
       text: "Hello! I'm TravelYatri, your personal travel expert. Just tell me where you want to go, when, and your budget - I'll create a complete itinerary for you instantly! For example: 'Plan a 5-day trip to Tokyo in March with a $2000 budget' or 'Weekend getaway to Paris, romantic, $800 budget'.",
       sender: 'assistant',
       timestamp: new Date()
@@ -732,22 +731,19 @@ const AIAssistantCard: React.FC = () => {
   );
 
   return (
-    <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-sm border border-gray-200 dark:border-gray-700 overflow-hidden">
+    <div className="bg-gray-50 dark:bg-gray-800 rounded-2xl p-6 shadow-sm border border-gray-200 dark:border-gray-700">
       {/* Header */}
-      <div className="bg-gradient-to-r from-purple-500 to-pink-600 p-6 text-white">
-        <div className="flex items-center space-x-3 mb-4">
-          <div className="p-2 bg-white/20 rounded-xl">
-            <Bot className="h-6 w-6" />
-          </div>
-          <div>
-            <h3 className="text-xl font-bold font-headline">TravelYatri</h3>
-            <p className="text-purple-100">Your Personal Travel Expert</p>
-          </div>
+      <div className="flex items-center space-x-3 mb-6 pb-4 border-b border-gray-200 dark:border-gray-700">
+        <div className="p-2 bg-blue-600 rounded-lg">
+          <Bot className="h-5 w-5 text-white" />
         </div>
-        
-        <div className="flex items-center space-x-2 text-purple-100">
-          <Sparkles className="h-4 w-4" />
-          <span className="text-sm">Instant Itinerary Generation • No Follow-ups Needed</span>
+        <div>
+          <h2 className="text-lg font-semibold text-gray-900 dark:text-gray-100">
+            TravelYatri AI
+          </h2>
+          <p className="text-sm text-gray-600 dark:text-gray-400">
+            Your Personal Travel Expert
+          </p>
         </div>
       </div>
 
@@ -823,7 +819,6 @@ const AIAssistantCard: React.FC = () => {
             value={message}
             onChange={(e) => setMessage(e.target.value)}
             onKeyPress={(e) => e.key === 'Enter' && handleSendMessage()}
-            placeholder="e.g., '5-day trip to Bali, $1200 budget, adventure'"
             placeholder="e.g., '5-day trip to Bali, ₹96,000 budget, adventure'"
             className={`flex-1 px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-xl bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 placeholder-gray-500 focus:ring-2 focus:ring-purple-500 focus:border-transparent text-sm transition-all ${
               isTyping ? 'opacity-50 cursor-not-allowed' : ''
