@@ -383,14 +383,6 @@ const AIAssistantCard: React.FC = () => {
       setMessage('');
       setIsTyping(true);
       
-      // Scroll to bottom after adding message
-      setTimeout(() => {
-        const chatContainer = document.getElementById('chat-messages');
-        if (chatContainer) {
-          chatContainer.scrollTop = chatContainer.scrollHeight;
-        }
-      }, 100);
-      
       setTimeout(() => {
         const tripInfo = extractTripInfo(currentMessage);
         
@@ -435,15 +427,7 @@ const AIAssistantCard: React.FC = () => {
         
         setMessages(prev => [...prev, assistantMessage]);
         setIsTyping(false);
-        
-        // Scroll to bottom after AI response
-        setTimeout(() => {
-          const chatContainer = document.getElementById('chat-messages');
-          if (chatContainer) {
-            chatContainer.scrollTop = chatContainer.scrollHeight;
-          }
-        }, 100);
-      }, 2000);
+      }, 1500);
     }
   };
 
@@ -613,7 +597,7 @@ const AIAssistantCard: React.FC = () => {
 
       {/* Chat Area */}
       <div className="p-6">
-        <div className="space-y-4 mb-4 max-h-96 overflow-y-auto" id="chat-messages">
+        <div className="space-y-4 mb-4 max-h-80 overflow-y-auto scrollbar-thin scrollbar-thumb-gray-300 dark:scrollbar-thumb-gray-600" id="chat-messages">
           {messages.map((msg) => (
             <div key={msg.id} className={`flex items-start space-x-3 ${msg.sender === 'user' ? 'flex-row-reverse space-x-reverse' : ''}`}>
               {msg.sender === 'assistant' && (
@@ -656,14 +640,16 @@ const AIAssistantCard: React.FC = () => {
           )}
         </div>
 
-        <div className="flex space-x-2">
+        <div className="flex space-x-2 mt-4">
           <input
             type="text"
             value={message}
             onChange={(e) => setMessage(e.target.value)}
             onKeyPress={(e) => e.key === 'Enter' && handleSendMessage()}
             placeholder="e.g., '5-day trip to Bali, $1200 budget, adventure'"
-            className="flex-1 px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-xl bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 placeholder-gray-500 focus:ring-2 focus:ring-purple-500 focus:border-transparent text-sm"
+            className={`flex-1 px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-xl bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 placeholder-gray-500 focus:ring-2 focus:ring-purple-500 focus:border-transparent text-sm transition-all ${
+              isTyping ? 'opacity-50 cursor-not-allowed' : ''
+            }`}
             disabled={isTyping}
           />
           <button
