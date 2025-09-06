@@ -1,228 +1,107 @@
-import React, { useState } from 'react';
-import { Bot, Send, Sparkles, MapPin, Calendar, DollarSign, Users, Mic, MicOff } from 'lucide-react';
+import React from 'react';
+import { MapPin, Calendar, Star, ArrowRight } from 'lucide-react';
 
-interface Message {
-  id: string;
-  text: string;
-  sender: 'user' | 'assistant';
-  timestamp: Date;
-}
-
-const AITravelAssistant: React.FC = () => {
-  const [message, setMessage] = useState('');
-  const [messages, setMessages] = useState<Message[]>([
-    {
-      id: '1',
-      text: "Hello! I'm your friendly Travel Planner AI Assistant. I'm here to help you design personalized travel plans, suggest amazing destinations, and create detailed itineraries just for you! 🌍✈️\n\nTo get started, you can tell me:\n• Where you'd like to go\n• How long you're planning to travel\n• Your budget range\n• What type of experience you're looking for\n\nWhat destination has caught your eye lately?",
-      sender: 'assistant',
-      timestamp: new Date()
-    }
-  ]);
-  const [isTyping, setIsTyping] = useState(false);
-  const [isListening, setIsListening] = useState(false);
-
-  const quickPrompts = [
-    { icon: MapPin, text: "Plan a 5-day trip to Paris", category: "destination" },
-    { icon: Calendar, text: "Weekend getaway ideas", category: "duration" },
-    { icon: DollarSign, text: "Budget-friendly European cities", category: "budget" },
-    { icon: Users, text: "Family vacation suggestions", category: "style" }
-  ];
-
-  const generateAIResponse = (userMessage: string) => {
-    const lowerMessage = userMessage.toLowerCase();
-    
-    // Check if user provided minimal information
-    if (lowerMessage.includes('paris') && !lowerMessage.includes('day') && !lowerMessage.includes('budget')) {
-      return "Paris is an amazing choice! 🇫🇷 To create the perfect itinerary for you, I'd love to know more:\n\n• **How many days** will you be staying?\n• **What's your budget range** (budget-friendly, mid-range, or luxury)?\n• **What interests you most?** (art & culture, food & wine, romance, history, or nightlife)\n• **What type of accommodation** do you prefer?\n\nOnce I have these details, I can create a detailed day-by-day plan with the best hotels, restaurants, and experiences tailored just for you!";
-    }
-    
-    if (lowerMessage.includes('5 day') && lowerMessage.includes('paris')) {
-      return "Wonderful! A 5-day Paris adventure! 🗼 Here's what I need to create your perfect itinerary:\n\n**Quick Questions:**\n• **Budget range?** ($100-150/day, $150-300/day, or $300+/day)\n• **Travel style?** (Cultural explorer, foodie, romantic getaway, or mix of everything)\n• **Accommodation preference?** (Budget hotel, boutique hotel, or luxury)\n\n**Here's a preview of what your 5-day Paris plan could include:**\n\n**Day 1:** Arrival + Eiffel Tower area\n**Day 2:** Louvre Museum + Seine River cruise\n**Day 3:** Montmartre + Sacré-Cœur\n**Day 4:** Versailles day trip\n**Day 5:** Shopping + departure prep\n\nLet me know your preferences and I'll create a detailed itinerary with specific recommendations!";
-    }
-    
-    if (lowerMessage.includes('weekend') || lowerMessage.includes('2 day')) {
-      return "Perfect for a quick escape! 🎒 Weekend getaways are my specialty. To suggest the best destinations:\n\n• **Where are you traveling from?** (so I can suggest nearby gems)\n• **What's your vibe?** (city exploration, nature retreat, beach relaxation, or cultural immersion)\n• **Budget range?** (budget-conscious, moderate, or splurge-worthy)\n\n**Popular weekend destinations I often recommend:**\n• **City breaks:** Amsterdam, Prague, Barcelona\n• **Nature escapes:** Swiss Alps, Scottish Highlands\n• **Beach vibes:** Nice, Santorini, Lisbon\n• **Cultural gems:** Florence, Vienna, Bruges\n\nWhat sounds most appealing to you?";
-    }
-    
-    if (lowerMessage.includes('budget') || lowerMessage.includes('cheap') || lowerMessage.includes('affordable')) {
-      return "Smart traveler! 💰 Budget-friendly doesn't mean compromising on amazing experiences. Here are some fantastic affordable destinations:\n\n**Eastern Europe Gems:**\n• **Prague, Czech Republic** - $50-70/day\n• **Budapest, Hungary** - $45-65/day\n• **Krakow, Poland** - $40-60/day\n\n**Southern Europe Values:**\n• **Porto, Portugal** - $55-75/day\n• **Valencia, Spain** - $60-80/day\n• **Athens, Greece** - $50-70/day\n\n**Money-saving tips I always share:**\n• Stay in hostels or budget hotels\n• Use public transport\n• Eat at local markets and street food\n• Look for free walking tours\n\nWhich region interests you most? I can create a detailed budget itinerary!";
-    }
-    
-    if (lowerMessage.includes('family') || lowerMessage.includes('kids') || lowerMessage.includes('children')) {
-      return "Family adventures are the best! 👨‍👩‍👧‍👦 I love helping families create unforgettable memories. Let me know:\n\n• **Ages of your children?** (helps me suggest age-appropriate activities)\n• **How many days** are you planning?\n• **Preferred destination type?** (theme parks, beach, cultural cities, nature)\n• **Budget considerations?**\n\n**Family-friendly destinations I highly recommend:**\n• **Orlando, Florida** - Theme park paradise\n• **London, UK** - Museums, parks, and Harry Potter!\n• **Barcelona, Spain** - Beaches, parks, and Gaudí\n• **Amsterdam, Netherlands** - Canals, bikes, and kid-friendly museums\n• **Tokyo, Japan** - Disney, technology, and unique culture\n\nWhat type of family adventure are you dreaming of?";
-    }
-    
-    // Default response for other queries
-    return "That sounds like an exciting travel idea! 🌟 I'm here to help you plan every detail. To create the most personalized recommendations for you:\n\n**Tell me about your dream trip:**\n• **Destination** (or if you need suggestions, let me know your interests!)\n• **Duration** (weekend, week, or longer?)\n• **Budget range** (so I can tailor recommendations)\n• **Travel style** (adventure, relaxation, culture, food, etc.)\n• **Special occasions?** (honeymoon, anniversary, family trip)\n\nThe more details you share, the better I can customize your perfect itinerary with specific hotels, restaurants, activities, and insider tips! What aspect of your trip would you like to start planning first?";
-  };
-
-  const handleQuickPrompt = (promptText: string) => {
-    const userMessage: Message = {
-      id: Date.now().toString(),
-      text: promptText,
-      sender: 'user',
-      timestamp: new Date()
-    };
-    
-    setMessages(prev => [...prev, userMessage]);
-    setIsTyping(true);
-    
-    setTimeout(() => {
-      const assistantMessage: Message = {
-        id: (Date.now() + 1).toString(),
-        text: generateAIResponse(promptText),
-        sender: 'assistant',
-        timestamp: new Date()
-      };
-      
-      setMessages(prev => [...prev, assistantMessage]);
-      setIsTyping(false);
-    }, 1500);
-  };
-
-  const handleSendMessage = () => {
-    if (message.trim()) {
-      const userMessage: Message = {
-        id: Date.now().toString(),
-        text: message,
-        sender: 'user',
-        timestamp: new Date()
-      };
-      
-      setMessages(prev => [...prev, userMessage]);
-      setMessage('');
-      setIsTyping(true);
-      
-      setTimeout(() => {
-        const assistantMessage: Message = {
-          id: (Date.now() + 1).toString(),
-          text: generateAIResponse(message),
-          sender: 'assistant',
-          timestamp: new Date()
-        };
-        
-        setMessages(prev => [...prev, assistantMessage]);
-        setIsTyping(false);
-      }, 2000);
-    }
-  };
-
-  const toggleVoiceInput = () => {
-    setIsListening(!isListening);
-    if (!isListening) {
-      setTimeout(() => setIsListening(false), 3000);
-    }
-  };
-
+const HeroSection: React.FC = () => {
   return (
-    <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-sm border border-gray-200 dark:border-gray-700 h-[600px] flex flex-col">
-      {/* Header */}
-      <div className="p-6 border-b border-gray-200 dark:border-gray-700">
-        <div className="flex items-center space-x-3">
-          <div className="p-2 bg-gradient-to-br from-blue-500 to-purple-600 rounded-xl">
-            <Bot className="h-5 w-5 text-white" />
-          </div>
-          <div>
-            <h3 className="font-semibold text-gray-900 dark:text-gray-100 font-headline">AI Travel Assistant</h3>
-            <p className="text-sm text-gray-600 dark:text-gray-400">Your personal travel planning expert</p>
-          </div>
-        </div>
+    <section className="text-center py-20 relative overflow-hidden">
+      {/* Subtle background pattern */}
+      <div className="absolute inset-0 bg-gradient-to-br from-slate-50 via-white to-blue-50/30 dark:from-slate-800/50 dark:via-slate-900 dark:to-blue-950/30 rounded-3xl"></div>
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,rgba(59,130,246,0.05),transparent_50%)]"></div>
+        <div className="absolute inset-0 bg-gradient-to-br from-blue-50 via-white to-indigo-50 dark:from-slate-900 dark:via-slate-800 dark:to-blue-950"></div>
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,rgba(59,130,246,0.1),transparent_70%)]"></div>
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_80%,rgba(99,102,241,0.08),transparent_70%)]"></div>
+        
+        {/* Floating Elements */}
+        <div className="absolute top-20 left-10 w-20 h-20 bg-blue-100 dark:bg-blue-900/30 rounded-full opacity-60 animate-pulse"></div>
+        <div className="absolute top-40 right-20 w-16 h-16 bg-indigo-100 dark:bg-indigo-900/30 rounded-full opacity-40 animate-pulse" style={{ animationDelay: '1s' }}></div>
+        <div className="absolute bottom-20 left-1/4 w-12 h-12 bg-purple-100 dark:bg-purple-900/30 rounded-full opacity-50 animate-pulse" style={{ animationDelay: '2s' }}></div>
       </div>
+      
+      <div className="relative z-10 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="mb-6">
+          <span className="inline-block px-4 py-2 bg-blue-50 dark:bg-blue-950/30 text-blue-600 dark:text-blue-400 rounded-full text-sm font-medium mb-6">
+            ✈️ Your Journey Starts Here
+          </span>
+        </div>
+        <h1 className="text-largedisplay font-bold font-headline mb-8 text-slate-900 dark:text-white leading-tight">
+          Plan Your Perfect
+          <br />
+          <span className="bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent">
+            Travel Experience
+          </span>
 
-      {/* Quick Prompts */}
-      <div className="p-4 border-b border-gray-200 dark:border-gray-700">
-        <h4 className="text-sm font-medium text-gray-700 dark:text-gray-300 mb-3">Quick Start</h4>
-        <div className="grid grid-cols-2 gap-2">
-          {quickPrompts.map((prompt, index) => (
-            <button
-              key={index}
-              onClick={() => handleQuickPrompt(prompt.text)}
-              className="flex items-center space-x-2 p-2 text-xs rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors text-left group"
-            >
-              <prompt.icon className="h-3 w-3 text-gray-400 group-hover:text-blue-500 transition-colors" />
-              <span className="text-gray-700 dark:text-gray-300 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors truncate">
-                {prompt.text}
-              </span>
+          {/* Main Heading */}
+          <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold font-headline mb-8 text-slate-900 dark:text-white leading-tight">
+            Holiday Trip Planner
+            <br />
+            <span className="bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 bg-clip-text text-transparent">
+              
+            </span>
+          </h1>
+
+          {/* Subtitle */}
+          <p className="text-xl md:text-2xl text-slate-600 dark:text-slate-300 mb-12 max-w-4xl mx-auto leading-relaxed">
+            Create personalized itineraries, discover hidden gems, and make every journey 
+            <br className="hidden md:block" />
+            unforgettable with our intelligent travel assistant.
+          </p>
+
+          {/* CTA Buttons */}
+          <div className="flex flex-col sm:flex-row items-center justify-center space-y-4 sm:space-y-0 sm:space-x-6 mb-16">
+            <button className="group inline-flex items-center space-x-3 bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white px-8 py-4 rounded-2xl font-semibold text-lg transition-all duration-300 hover:shadow-2xl hover:shadow-blue-500/25 hover:-translate-y-1 transform">
+              <span>Start Planning</span>
+              <ArrowRight className="h-5 w-5 group-hover:translate-x-1 transition-transform" />
             </button>
-          ))}
-        </div>
-      </div>
+            <button className="inline-flex items-center space-x-2 text-slate-600 dark:text-slate-300 hover:text-blue-600 dark:hover:text-blue-400 font-medium transition-colors">
+              <span>Watch Demo</span>
+              <div className="w-8 h-8 bg-white dark:bg-slate-800 rounded-full flex items-center justify-center shadow-md">
+                <div className="w-0 h-0 border-l-[6px] border-l-blue-600 border-t-[4px] border-t-transparent border-b-[4px] border-b-transparent ml-0.5"></div>
+              </div>
+            </button>
+          </div>
 
-      {/* Chat Area */}
-      <div className="flex-1 p-4 overflow-hidden flex flex-col">
-        <div className="flex-1 space-y-4 mb-4 overflow-y-auto">
-          {messages.map((msg) => (
-            <div key={msg.id} className={`flex items-start space-x-3 ${msg.sender === 'user' ? 'flex-row-reverse space-x-reverse' : ''}`}>
-              {msg.sender === 'assistant' && (
-                <div className="p-1 bg-blue-100 dark:bg-blue-900/30 rounded-lg flex-shrink-0">
-                  <Bot className="h-4 w-4 text-blue-600 dark:text-blue-400" />
+          {/* Enhanced Stats */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-4xl mx-auto">
+            <div className="group">
+              <div className="bg-white/60 dark:bg-slate-800/60 backdrop-blur-sm rounded-2xl p-6 border border-slate-200 dark:border-slate-700 hover:border-blue-300 dark:hover:border-blue-600 transition-all duration-300 hover:shadow-lg hover:-translate-y-1">
+                <div className="flex items-center justify-center mb-4">
+                  <div className="p-3 bg-blue-100 dark:bg-blue-900/30 rounded-xl">
+                    <MapPin className="h-6 w-6 text-blue-600 dark:text-blue-400" />
+                  </div>
                 </div>
-              )}
-              {msg.sender === 'user' && (
-                <div className="p-1 bg-gray-100 dark:bg-gray-700 rounded-lg flex-shrink-0">
-                  <div className="h-4 w-4 bg-gray-600 dark:bg-gray-400 rounded-full"></div>
-                </div>
-              )}
-              <div className={`flex-1 ${msg.sender === 'user' ? 'text-right' : ''}`}>
-                <div className={`inline-block p-3 rounded-xl max-w-full ${
-                  msg.sender === 'user' 
-                    ? 'bg-blue-600 text-white' 
-                    : 'bg-gray-100 dark:bg-gray-700 text-gray-900 dark:text-gray-100'
-                }`}>
-                  <p className="text-sm leading-relaxed whitespace-pre-line">{msg.text}</p>
-                </div>
-                <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
-                  {msg.timestamp.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
-                </p>
+                <div className="text-3xl font-bold text-slate-900 dark:text-white mb-2">150+</div>
+                <p className="text-slate-600 dark:text-slate-400 font-medium">Destinations</p>
               </div>
             </div>
-          ))}
 
-          {isTyping && (
-            <div className="flex items-start space-x-3">
-              <div className="p-1 bg-blue-100 dark:bg-blue-900/30 rounded-lg">
-                <Bot className="h-4 w-4 text-blue-600 dark:text-blue-400" />
-              </div>
-              <div className="flex items-center space-x-1">
-                <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce"></div>
-                <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce" style={{ animationDelay: '0.1s' }}></div>
-                <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce" style={{ animationDelay: '0.2s' }}></div>
+            <div className="group">
+              <div className="bg-white/60 dark:bg-slate-800/60 backdrop-blur-sm rounded-2xl p-6 border border-slate-200 dark:border-slate-700 hover:border-indigo-300 dark:hover:border-indigo-600 transition-all duration-300 hover:shadow-lg hover:-translate-y-1">
+                <div className="flex items-center justify-center mb-4">
+                  <div className="p-3 bg-indigo-100 dark:bg-indigo-900/30 rounded-xl">
+                    <Calendar className="h-6 w-6 text-indigo-600 dark:text-indigo-400" />
+                  </div>
+                </div>
+                <div className="text-3xl font-bold text-slate-900 dark:text-white mb-2">1,200+</div>
+                <p className="text-slate-600 dark:text-slate-400 font-medium">Trips Planned</p>
               </div>
             </div>
-          )}
-        </div>
 
-        {/* Input Area */}
-        <div className="flex space-x-2">
-          <input
-            type="text"
-            value={message}
-            onChange={(e) => setMessage(e.target.value)}
-            onKeyPress={(e) => e.key === 'Enter' && handleSendMessage()}
-            placeholder="Ask me about your dream destination..."
-            className="flex-1 px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-xl bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 placeholder-gray-500 focus:ring-2 focus:ring-blue-500 focus:border-transparent text-sm"
-          />
-          <button
-            onClick={toggleVoiceInput}
-            className={`p-2 rounded-xl transition-colors ${
-              isListening 
-                ? 'bg-red-600 text-white' 
-                : 'bg-gray-200 dark:bg-gray-600 text-gray-600 dark:text-gray-300 hover:bg-gray-300 dark:hover:bg-gray-500'
-            }`}
-          >
-            {isListening ? <MicOff className="h-4 w-4" /> : <Mic className="h-4 w-4" />}
-          </button>
-          <button
-            onClick={handleSendMessage}
-            disabled={!message.trim()}
-            className="p-2 bg-blue-600 text-white rounded-xl hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
-          >
-            <Send className="h-4 w-4" />
-          </button>
+            <div className="group">
+              <div className="bg-white/60 dark:bg-slate-800/60 backdrop-blur-sm rounded-2xl p-6 border border-slate-200 dark:border-slate-700 hover:border-purple-300 dark:hover:border-purple-600 transition-all duration-300 hover:shadow-lg hover:-translate-y-1">
+                <div className="flex items-center justify-center mb-4">
+                  <div className="p-3 bg-purple-100 dark:bg-purple-900/30 rounded-xl">
+                    <Star className="h-6 w-6 text-purple-600 dark:text-purple-400" />
+                  </div>
+                </div>
+                <div className="text-3xl font-bold text-slate-900 dark:text-white mb-2">4.9</div>
+                <p className="text-slate-600 dark:text-slate-400 font-medium">User Rating</p>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
-    </div>
+    </section>
   );
 };
 
-export default AITravelAssistant;
+export default HeroSection;
