@@ -267,9 +267,10 @@ const AIAssistantCard: React.FC = () => {
 
   const handleSendMessage = () => {
     if (message.trim()) {
+      const currentMessage = message.trim();
       const userMessage: Message = {
         id: Date.now().toString(),
-        text: message,
+        text: currentMessage,
         sender: 'user',
         timestamp: new Date()
       };
@@ -278,20 +279,66 @@ const AIAssistantCard: React.FC = () => {
       setMessage('');
       setIsTyping(true);
       
+      // Scroll to bottom after adding message
       setTimeout(() => {
-        const tripInfo = extractTripInfo(message);
-        const itinerary = generateItinerary(tripInfo);
+        const chatContainer = document.getElementById('chat-messages');
+        if (chatContainer) {
+          chatContainer.scrollTop = chatContainer.scrollHeight;
+        }
+      }, 100);
+      
+      setTimeout(() => {
+        const tripInfo = extractTripInfo(currentMessage);
         
-        const assistantMessage: Message = {
-          id: (Date.now() + 1).toString(),
-          text: `Excellent choice! I've crafted a personalized ${itinerary.duration} itinerary for ${itinerary.destination} that fits your ${itinerary.budget} budget perfectly. Each day is optimized for the best experience with a mix of must-see attractions, local experiences, and great dining options.`,
-          sender: 'assistant',
-          timestamp: new Date(),
-          itinerary
-        };
+        // Check if user is asking for an itinerary or just general travel question
+        const isItineraryRequest = currentMessage.toLowerCase().includes('plan') || 
+                                 currentMessage.toLowerCase().includes('trip') || 
+                                 currentMessage.toLowerCase().includes('itinerary') ||
+                                 currentMessage.toLowerCase().includes('day') ||
+                                 /\$\d+/.test(currentMessage) || // Contains budget
+                                 /(tokyo|paris|mumbai|delhi|london|new york|bali|dubai|singapore|bangkok|rome|barcelona)/i.test(currentMessage);
+        
+        let assistantMessage: Message;
+        
+        if (isItineraryRequest) {
+          const itinerary = generateItinerary(tripInfo);
+          assistantMessage = {
+            id: (Date.now() + 1).toString(),
+            text: `Excellent choice! I've crafted a personalized ${itinerary.duration} itinerary for ${itinerary.destination} that fits your ${itinerary.budget} budget perfectly. Each day is optimized for the best experience with a mix of must-see attractions, local experiences, and great dining options.`,
+            sender: 'assistant',
+            timestamp: new Date(),
+            itinerary
+          };
+        } else {
+          // Generate general travel advice responses
+          const generalResponses = [
+            "That's a great question! As your travel expert, I'd recommend considering the local culture and customs when planning your activities. What specific aspect would you like me to help you with?",
+            "Absolutely! Based on my experience helping travelers, I can share some insights about that. Are you looking for recommendations for a specific destination or general travel tips?",
+            "Great point! I love helping with travel planning details. From my years of experience, I've found that preparation makes all the difference. What would you like to know more about?",
+            "That's something many travelers ask about! I'm here to help you make the most of your trip. Would you like me to create a detailed itinerary for a specific destination?",
+            "Excellent question! Travel planning can seem overwhelming, but I'm here to make it easy for you. Just tell me your destination, dates, and budget, and I'll create a complete itinerary!"
+          ];
+          
+          const randomResponse = generalResponses[Math.floor(Math.random() * generalResponses.length)];
+          
+          assistantMessage = {
+            id: (Date.now() + 1).toString(),
+            text: randomResponse,
+            sender: 'assistant',
+            timestamp: new Date()
+          };
+        }
         
         setMessages(prev => [...prev, assistantMessage]);
         setIsTyping(false);
+        
+        // Scroll to bottom after AI response
+        setTimeout(() => {
+          const chatContainer = document.getElementById('chat-messages');
+          if (chatContainer) {
+            chatContainer.scrollTop = chatContainer.scrollHeight;
+          }
+        }, 100);
       }, 2000);
     }
   };
@@ -462,8 +509,8 @@ const AIAssistantCard: React.FC = () => {
 
       {/* Chat Area */}
       <div className="p-6">
-        <div className="space-y-4 mb-4 max-h-96 overflow-y-auto">
-          {messages.slice(-2).map((msg) => (
+        <div className="space-y-4 mb-4 max-h-96 overflow-y-auto" id="chat-messages">
+          {messages.map((msg) => (
             <div key={msg.id} className={`flex items-start space-x-3 ${msg.sender === 'user' ? 'flex-row-reverse space-x-reverse' : ''}`}>
               {msg.sender === 'assistant' && (
                 <div className="p-1 bg-purple-100 dark:bg-purple-900/30 rounded-lg flex-shrink-0">
@@ -483,6 +530,9 @@ const AIAssistantCard: React.FC = () => {
                 }`}>
                   <p className="text-sm leading-relaxed">{msg.text}</p>
                 </div>
+                <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
+                  {msg.timestamp.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
+                </p>
                 {msg.itinerary && <ItineraryPreview itinerary={msg.itinerary} />}
               </div>
             </div>
