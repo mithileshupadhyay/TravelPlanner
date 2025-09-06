@@ -104,121 +104,298 @@ const AIAssistantCard: React.FC = () => {
       
       // Tokyo Itineraries
       if (destLower.includes('tokyo') || destLower.includes('japan')) {
+        const tokyoActivities = [
+          // Day 1 Activities
+          [
+            { period: 'morning', time: '09:00', title: 'Arrive in Tokyo', location: 'Narita Airport', duration: '2 hours', category: 'travel', icon: '✈️', cost: '₹4,800', description: 'Land at Narita Airport → Take Airport Express to city center → Check into hotel', tips: 'Get a JR Pass for unlimited train travel throughout Japan' },
+            { period: 'afternoon', time: '14:00', title: 'Explore Asakusa District', location: 'Asakusa', duration: '3 hours', category: 'culture', icon: '⛩️', cost: 'Free', description: 'Visit ancient Senso-ji Temple → Walk through traditional Nakamise Shopping Street → Try taiyaki and ningyo-yaki snacks', tips: 'Best time for photos is late afternoon with golden light on the temple' },
+            { period: 'evening', time: '19:00', title: 'Authentic Ramen Experience', location: 'Shibuya', duration: '1.5 hours', category: 'food', icon: '🍜', cost: '₹2,000', description: 'Dinner at famous Ichiran or Ippudo ramen shop → Experience Tokyo nightlife in Shibuya', tips: 'Try tonkotsu ramen - it\'s a local favorite, and don\'t be shy about slurping!' }
+          ],
+          // Day 2 Activities
+          [
+            { period: 'morning', time: '09:00', title: 'Tokyo Skytree Experience', location: 'Sumida', duration: '2.5 hours', category: 'sightseeing', icon: '🗼', cost: '₹2,500', description: 'Ascend Tokyo\'s tallest tower → 360° city views → Visit Skytree Town shopping complex', tips: 'Book tickets online to skip long queues, especially on weekends' },
+            { period: 'afternoon', time: '13:00', title: 'Tsukiji Outer Market Food Tour', location: 'Tsukiji', duration: '2 hours', category: 'food', icon: '🐟', cost: '₹3,200', description: 'Fresh sushi breakfast → Street food sampling → Learn about Japanese culinary culture', tips: 'Go early for the freshest selections and try the famous tuna sashimi' },
+            { period: 'evening', time: '18:00', title: 'Shibuya Crossing & Shopping', location: 'Shibuya', duration: '2 hours', category: 'sightseeing', icon: '🚶', cost: '₹1,600', description: 'Experience world\'s busiest crossing → Shopping at Shibuya 109 → Visit Hachiko statue', tips: 'Best crossing views from Starbucks overlooking the intersection' }
+          ],
+          // Day 3 Activities
+          [
+            { period: 'morning', time: '09:00', title: 'Meiji Shrine & Harajuku', location: 'Shibuya', duration: '3 hours', category: 'culture', icon: '⛩️', cost: 'Free', description: 'Peaceful shrine in the city → Harajuku fashion district → Takeshita Street shopping', tips: 'Visit shrine early for peaceful atmosphere, then explore colorful Harajuku' },
+            { period: 'afternoon', time: '14:00', title: 'Imperial Palace Gardens', location: 'Chiyoda', duration: '2 hours', category: 'nature', icon: '🏯', cost: 'Free', description: 'Beautiful Japanese gardens → Historical palace grounds → Cherry blossoms (seasonal)', tips: 'Free guided tours available on weekends' },
+            { period: 'evening', time: '18:00', title: 'Ginza Fine Dining', location: 'Ginza', duration: '2 hours', category: 'food', icon: '🍱', cost: '₹4,800', description: 'Upscale sushi experience → Premium wagyu beef → Sake tasting', tips: 'Make reservations in advance for the best restaurants' }
+          ],
+          // Day 4 Activities
+          [
+            { period: 'morning', time: '09:00', title: 'Ueno Park & Museums', location: 'Ueno', duration: '3 hours', category: 'culture', icon: '🎨', cost: '₹1,200', description: 'Tokyo National Museum → Ueno Zoo → Beautiful park walks', tips: 'Great for families, especially the panda exhibit at the zoo' },
+            { period: 'afternoon', time: '14:00', title: 'Akihabara Electronics District', location: 'Akihabara', duration: '2.5 hours', category: 'shopping', icon: '🤖', cost: '₹2,400', description: 'Electronics shopping → Anime culture → Gaming arcades → Maid cafes', tips: 'Perfect for tech enthusiasts and anime fans' },
+            { period: 'evening', time: '19:00', title: 'Roppongi Nightlife', location: 'Roppongi', duration: '2 hours', category: 'nightlife', icon: '🌃', cost: '₹3,200', description: 'International dining → Rooftop bars → Tokyo Tower night views', tips: 'Great area for international cuisine and nightlife' }
+          ],
+          // Day 5 Activities
+          [
+            { period: 'morning', time: '08:00', title: 'Day Trip to Nikko', location: 'Nikko', duration: '4 hours', category: 'nature', icon: '🏔️', cost: '₹4,000', description: 'UNESCO World Heritage temples → Beautiful nature → Traditional architecture', tips: 'Take JR pass for easy train access, about 2 hours from Tokyo' },
+            { period: 'afternoon', time: '15:00', title: 'Return to Tokyo - Odaiba', location: 'Odaiba', duration: '3 hours', category: 'sightseeing', icon: '🌉', cost: '₹1,600', description: 'Futuristic island → Rainbow Bridge → TeamLab digital art museum', tips: 'Book TeamLab tickets online well in advance' },
+            { period: 'evening', time: '19:00', title: 'Farewell Dinner in Shinjuku', location: 'Shinjuku', duration: '2 hours', category: 'food', icon: '🍻', cost: '₹3,600', description: 'Izakaya experience → Memory Lane (Omoide Yokocho) → Final Tokyo night', tips: 'Try yakitori and local sake for an authentic experience' }
+          ],
+          // Day 6 Activities
+          [
+            { period: 'morning', time: '09:00', title: 'Tokyo DisneySea', location: 'Urayasu', duration: '8 hours', category: 'entertainment', icon: '🎢', cost: '₹6,400', description: 'Unique Disney park → Nautical themed attractions → Full day adventure', tips: 'Get FastPass tickets early for popular rides' },
+            { period: 'evening', time: '19:00', title: 'Sumida River Cruise', location: 'Sumida River', duration: '1.5 hours', category: 'sightseeing', icon: '🚢', cost: '₹2,000', description: 'Evening river cruise → Tokyo skyline → Relaxing end to busy day', tips: 'Beautiful views of Tokyo Skytree and city lights' }
+          ],
+          // Day 7 Activities
+          [
+            { period: 'morning', time: '09:00', title: 'Kamakura Day Trip', location: 'Kamakura', duration: '4 hours', category: 'culture', icon: '🗿', cost: '₹2,800', description: 'Great Buddha statue → Historic temples → Traditional Japanese town', tips: 'Take Odakyu line from Shinjuku, about 1 hour journey' },
+            { period: 'afternoon', time: '15:00', title: 'Last-minute Shopping in Shibuya', location: 'Shibuya', duration: '2 hours', category: 'shopping', icon: '🛍️', cost: '₹4,000', description: 'Souvenir shopping → Final photos at Hachiko → Shibuya Sky observation deck', tips: 'Don\'t forget to buy omiyage (souvenirs) for friends and family' },
+            { period: 'evening', time: '18:00', title: 'Departure Preparation', location: 'Hotel', duration: '2 hours', category: 'travel', icon: '🧳', cost: 'Free', description: 'Pack belongings → Check-out → Airport transfer preparation', tips: 'Allow extra time for airport security and departure procedures' }
+          ]
+        ];
+
+        const dayTitles = [
+          'Welcome to Tokyo!',
+          'Modern Tokyo & Sky Views', 
+          'Culture & Fashion Districts',
+          'Museums & Electronics',
+          'Nature & Art Experiences',
+          'Disney Magic & River Views',
+          'Historic Towns & Farewell'
+        ];
+
+        const dayThemes = [
+          'Arrival, traditional culture, and modern city vibes',
+          'Skyscrapers, technology, and panoramic city views',
+          'Spiritual sites and youth culture exploration',
+          'Art, history, and modern Japanese pop culture',
+          'Natural beauty and cutting-edge digital art',
+          'Theme park fun and scenic river cruises',
+          'Historical day trips and final Tokyo memories'
+        ];
+
         return {
           title: `Tokyo Adventure: ${days}-Day Cultural & Culinary Journey`,
           description: 'Experience the perfect blend of traditional culture and modern marvels in Japan\'s vibrant capital',
-          days: [
-            {
-              day: 1,
-              title: 'Welcome to Tokyo!',
-              theme: 'Arrival, traditional culture, and modern city vibes',
-              activities: [
-                { period: 'morning', time: '09:00', title: 'Arrive in Tokyo', location: 'Narita Airport', duration: '2 hours', category: 'travel', icon: '✈️', cost: '$60', description: 'Land at Narita Airport → Take Airport Express to city center → Check into hotel', tips: 'Get a JR Pass for unlimited train travel throughout Japan' },
-                { period: 'afternoon', time: '14:00', title: 'Explore Asakusa District', location: 'Asakusa', duration: '3 hours', category: 'culture', icon: '⛩️', cost: 'Free', description: 'Visit ancient Senso-ji Temple → Walk through traditional Nakamise Shopping Street → Try taiyaki and ningyo-yaki snacks', tips: 'Best time for photos is late afternoon with golden light on the temple' },
-                { period: 'evening', time: '19:00', title: 'Authentic Ramen Experience', location: 'Shibuya', duration: '1.5 hours', category: 'food', icon: '🍜', cost: '$25', description: 'Dinner at famous Ichiran or Ippudo ramen shop → Experience Tokyo nightlife in Shibuya', tips: 'Try tonkotsu ramen - it\'s a local favorite, and don\'t be shy about slurping!' }
-              ]
-            },
-            {
-              day: 2,
-              title: 'Modern Tokyo & Sky Views',
-              theme: 'Skyscrapers, technology, and panoramic city views',
-              activities: [
-                { period: 'morning', time: '09:00', title: 'Tokyo Skytree Experience', location: 'Sumida', duration: '2.5 hours', category: 'sightseeing', icon: '🗼', cost: '$30', description: 'Ascend Tokyo\'s tallest tower → 360° city views → Visit Skytree Town shopping complex', tips: 'Book tickets online to skip long queues, especially on weekends' },
-                { period: 'afternoon', time: '13:00', title: 'Tsukiji Outer Market Food Tour', location: 'Tsukiji', duration: '2 hours', category: 'food', icon: '🐟', cost: '$40', description: 'Fresh sushi breakfast → Street food sampling → Learn about Japanese culinary culture', tips: 'Go early for the freshest selections and try the famous tuna sashimi' },
-                { period: 'evening', time: '18:00', title: 'Shibuya Crossing & Shopping', location: 'Shibuya', duration: '2 hours', category: 'sightseeing', icon: '🚶', cost: '$20', description: 'Experience world\'s busiest crossing → Shopping at Shibuya 109 → Visit Hachiko statue', tips: 'Best crossing views from Starbucks overlooking the intersection' }
-              ]
-            }
-          ]
+          days: Array.from({ length: Math.min(days, 7) }, (_, i) => ({
+            day: i + 1,
+            title: dayTitles[i] || `Day ${i + 1} in Tokyo`,
+            theme: dayThemes[i] || 'Exploring more of Tokyo\'s wonders',
+            activities: tokyoActivities[i] || tokyoActivities[i % tokyoActivities.length]
+          }))
         };
       }
       
       // Paris Itineraries
       if (destLower.includes('paris') || destLower.includes('france')) {
+        const parisActivities = [
+          // Day 1
+          [
+            { period: 'morning', time: '09:00', title: 'Eiffel Tower Experience', location: 'Champ de Mars', duration: '2.5 hours', category: 'sightseeing', icon: '🗼', cost: '₹2,800', description: 'Ascend the Iron Lady → Panoramic Paris views → Photo session at Trocadéro Gardens', tips: 'Visit early morning to avoid crowds and get the best photos' },
+            { period: 'afternoon', time: '14:00', title: 'Seine River Cruise', location: 'Seine River', duration: '1.5 hours', category: 'romantic', icon: '🚢', cost: '₹2,300', description: 'Romantic boat ride → See Paris from the water → Pass Notre-Dame and Louvre', tips: 'Choose a sunset cruise for the most romantic experience with champagne' },
+            { period: 'evening', time: '19:30', title: 'French Bistro Dinner', location: 'Latin Quarter', duration: '2 hours', category: 'food', icon: '🥖', cost: '₹6,000', description: 'Authentic French cuisine → Wine pairing → Candlelit atmosphere at Le Procope', tips: 'Try coq au vin or bouillabaisse for a true French culinary experience' }
+          ],
+          // Day 2
+          [
+            { period: 'morning', time: '09:00', title: 'Louvre Museum Tour', location: 'Louvre', duration: '3 hours', category: 'culture', icon: '🎨', cost: '₹1,600', description: 'See Mona Lisa → Venus de Milo → Egyptian antiquities → Skip-the-line access', tips: 'Book timed entry tickets online and focus on 2-3 wings to avoid overwhelm' },
+            { period: 'afternoon', time: '14:00', title: 'Champs-Élysées Stroll', location: 'Champs-Élysées', duration: '2 hours', category: 'shopping', icon: '🛍️', cost: '₹4,000', description: 'Window shopping → Arc de Triomphe → Café culture experience', tips: 'Perfect for people-watching and enjoying French café culture' },
+            { period: 'evening', time: '19:00', title: 'Montmartre Evening', location: 'Montmartre', duration: '2.5 hours', category: 'culture', icon: '🎭', cost: '₹2,400', description: 'Sacré-Cœur Basilica → Artist squares → Sunset views over Paris', tips: 'Take the funicular up the hill and stay for the magical sunset views' }
+          ],
+          // Day 3
+          [
+            { period: 'morning', time: '09:00', title: 'Versailles Palace Day Trip', location: 'Versailles', duration: '4 hours', category: 'culture', icon: '👑', cost: '₹3,200', description: 'Opulent palace → Hall of Mirrors → Marie Antoinette\'s estate → Royal gardens', tips: 'Take RER C train from central Paris, book skip-the-line tickets' },
+            { period: 'afternoon', time: '15:00', title: 'Latin Quarter Exploration', location: 'Latin Quarter', duration: '2 hours', category: 'culture', icon: '📚', cost: 'Free', description: 'Sorbonne University → Panthéon → Shakespeare and Company bookstore', tips: 'Great area for intellectual atmosphere and historic cafés' },
+            { period: 'evening', time: '19:00', title: 'Wine Tasting Experience', location: 'Marais District', duration: '2 hours', category: 'food', icon: '🍷', cost: '₹4,800', description: 'French wine education → Cheese pairing → Local wine bar experience', tips: 'Learn about different French wine regions and perfect pairings' }
+          ],
+          // Day 4
+          [
+            { period: 'morning', time: '09:00', title: 'Musée d\'Orsay', location: 'Saint-Germain', duration: '2.5 hours', category: 'culture', icon: '🎨', cost: '₹1,200', description: 'Impressionist masterpieces → Monet, Renoir, Van Gogh → Beautiful Belle Époque station', tips: 'Less crowded than Louvre, perfect for art lovers' },
+            { period: 'afternoon', time: '13:00', title: 'Luxembourg Gardens', location: 'Luxembourg', duration: '2 hours', category: 'nature', icon: '🌳', cost: 'Free', description: 'Beautiful palace gardens → Model sailboats → Peaceful walks → Palace visit', tips: 'Perfect for picnics and relaxation in the heart of Paris' },
+            { period: 'evening', time: '18:00', title: 'Cabaret Show at Moulin Rouge', location: 'Pigalle', duration: '2.5 hours', category: 'entertainment', icon: '💃', cost: '₹8,000', description: 'Iconic cabaret performance → French cancan → Champagne dinner option', tips: 'Book well in advance, dress code required' }
+          ],
+          // Day 5
+          [
+            { period: 'morning', time: '09:00', title: 'Sainte-Chapelle & Notre-Dame Area', location: 'Île de la Cité', duration: '2.5 hours', category: 'culture', icon: '⛪', cost: '₹1,600', description: 'Stunning stained glass → Gothic architecture → Seine island exploration', tips: 'Visit Sainte-Chapelle on sunny day for best stained glass experience' },
+            { period: 'afternoon', time: '14:00', title: 'Le Marais District', location: 'Marais', duration: '3 hours', category: 'culture', icon: '🏘️', cost: '₹2,000', description: 'Jewish quarter → Vintage shopping → Art galleries → Historic architecture', tips: 'Great for unique shopping and discovering hidden courtyards' },
+            { period: 'evening', time: '19:00', title: 'Dinner Cruise on Seine', location: 'Seine River', duration: '2.5 hours', category: 'romantic', icon: '🛥️', cost: '₹7,200', description: 'Gourmet dinner → Paris landmarks by night → Romantic atmosphere', tips: 'Most romantic way to see illuminated Paris monuments' }
+          ]
+        ];
+
+        const parisDayTitles = [
+          'Iconic Paris Welcome',
+          'Art & Culture Immersion',
+          'Royal Splendor & Literary Paris',
+          'Gardens & Glamorous Nights',
+          'Gothic Beauty & Historic Quarters'
+        ];
+
+        const parisDayThemes = [
+          'Classic landmarks and Seine river magic',
+          'World-class museums and Parisian elegance',
+          'Royal palaces and intellectual atmosphere',
+          'Peaceful gardens and spectacular entertainment',
+          'Medieval architecture and charming neighborhoods'
+        ];
+
         return {
           title: `Paris Romance: ${days}-Day Enchanting Journey`,
           description: 'Fall in love with the City of Light through art, cuisine, and timeless romance',
-          days: [
-            {
-              day: 1,
-              title: 'Iconic Paris Welcome',
-              theme: 'Classic landmarks and Seine river magic',
-              activities: [
-                { period: 'morning', time: '09:00', title: 'Eiffel Tower Experience', location: 'Champ de Mars', duration: '2.5 hours', category: 'sightseeing', icon: '🗼', cost: '$35', description: 'Ascend the Iron Lady → Panoramic Paris views → Photo session at Trocadéro Gardens', tips: 'Visit early morning to avoid crowds and get the best photos' },
-                { period: 'afternoon', time: '14:00', title: 'Seine River Cruise', location: 'Seine River', duration: '1.5 hours', category: 'romantic', icon: '🚢', cost: '$28', description: 'Romantic boat ride → See Paris from the water → Pass Notre-Dame and Louvre', tips: 'Choose a sunset cruise for the most romantic experience with champagne' },
-                { period: 'evening', time: '19:30', title: 'French Bistro Dinner', location: 'Latin Quarter', duration: '2 hours', category: 'food', icon: '🥖', cost: '$75', description: 'Authentic French cuisine → Wine pairing → Candlelit atmosphere at Le Procope', tips: 'Try coq au vin or bouillabaisse for a true French culinary experience' }
-              ]
-            },
-            {
-              day: 2,
-              title: 'Art & Culture Immersion',
-              theme: 'World-class museums and Parisian elegance',
-              activities: [
-                { period: 'morning', time: '09:00', title: 'Louvre Museum Tour', location: 'Louvre', duration: '3 hours', category: 'culture', icon: '🎨', cost: '$20', description: 'See Mona Lisa → Venus de Milo → Egyptian antiquities → Skip-the-line access', tips: 'Book timed entry tickets online and focus on 2-3 wings to avoid overwhelm' },
-                { period: 'afternoon', time: '14:00', title: 'Champs-Élysées Stroll', location: 'Champs-Élysées', duration: '2 hours', category: 'shopping', icon: '🛍️', cost: '$50', description: 'Window shopping → Arc de Triomphe → Café culture experience', tips: 'Perfect for people-watching and enjoying French café culture' },
-                { period: 'evening', time: '19:00', title: 'Montmartre Evening', location: 'Montmartre', duration: '2.5 hours', category: 'culture', icon: '🎭', cost: '$30', description: 'Sacré-Cœur Basilica → Artist squares → Sunset views over Paris', tips: 'Take the funicular up the hill and stay for the magical sunset views' }
-              ]
-            }
-          ]
+          days: Array.from({ length: Math.min(days, 5) }, (_, i) => ({
+            day: i + 1,
+            title: parisDayTitles[i] || `Day ${i + 1} in Paris`,
+            theme: parisDayThemes[i] || 'Discovering more Parisian charm',
+            activities: parisActivities[i] || parisActivities[i % parisActivities.length]
+          }))
         };
       }
       
       // London Itineraries
       if (destLower.includes('london') || destLower.includes('uk') || destLower.includes('england')) {
+        const londonActivities = [
+          // Day 1
+          [
+            { period: 'morning', time: '09:00', title: 'Buckingham Palace & Changing of Guard', location: 'Westminster', duration: '2 hours', category: 'culture', icon: '👑', cost: 'Free', description: 'Watch the famous ceremony → Explore St. James\'s Park → Royal photo opportunities', tips: 'Arrive early for the best viewing spots, ceremony happens at 11:00 AM' },
+            { period: 'afternoon', time: '13:00', title: 'Westminster Abbey & Big Ben', location: 'Westminster', duration: '2.5 hours', category: 'culture', icon: '⛪', cost: '₹2,000', description: 'Royal wedding venue → Poets\' Corner → Crown Jewels nearby → Thames walk', tips: 'Audio guide included - don\'t miss the Coronation Chair' },
+            { period: 'evening', time: '18:00', title: 'Traditional Pub Experience', location: 'Covent Garden', duration: '2 hours', category: 'food', icon: '🍺', cost: '₹3,200', description: 'Fish & chips → Local ales → Live music → British pub culture', tips: 'Try a proper pint of bitter and don\'t forget mushy peas with your fish & chips' }
+          ],
+          // Day 2
+          [
+            { period: 'morning', time: '09:00', title: 'Tower of London & Crown Jewels', location: 'Tower Hill', duration: '3 hours', category: 'culture', icon: '💎', cost: '₹2,400', description: 'Historic fortress → Crown Jewels → Beefeater tour → Tower Bridge views', tips: 'Book online to skip queues, join a Yeoman Warder tour for best stories' },
+            { period: 'afternoon', time: '14:00', title: 'British Museum', location: 'Bloomsbury', duration: '2.5 hours', category: 'culture', icon: '🏛️', cost: 'Free', description: 'Rosetta Stone → Egyptian mummies → Greek sculptures → World history', tips: 'Free entry but donations appreciated, focus on specific galleries' },
+            { period: 'evening', time: '19:00', title: 'West End Theatre Show', location: 'West End', duration: '3 hours', category: 'entertainment', icon: '🎭', cost: '₹4,800', description: 'World-class musical → Historic theatres → London\'s Broadway equivalent', tips: 'Book popular shows in advance, same-day lottery tickets available' }
+          ],
+          // Day 3
+          [
+            { period: 'morning', time: '09:00', title: 'Windsor Castle Day Trip', location: 'Windsor', duration: '4 hours', category: 'culture', icon: '🏰', cost: '₹3,600', description: 'Queen\'s weekend residence → State Apartments → St. George\'s Chapel → Royal history', tips: 'Take train from London Paddington, check if Queen is in residence' },
+            { period: 'afternoon', time: '15:00', title: 'Hyde Park & Kensington Palace', location: 'Kensington', duration: '2 hours', category: 'nature', icon: '🌳', cost: '₹1,600', description: 'Princess Diana memorial → Speaker\'s Corner → Beautiful gardens → Royal residence', tips: 'Great for walking and learning about recent royal history' },
+            { period: 'evening', time: '18:00', title: 'Afternoon Tea Experience', location: 'Mayfair', duration: '1.5 hours', category: 'food', icon: '🫖', cost: '₹4,000', description: 'Traditional British afternoon tea → Scones with clotted cream → Finger sandwiches', tips: 'Dress smart casual, book at historic hotels like The Ritz or Fortnum & Mason' }
+          ]
+        ];
+
+        const londonDayTitles = [
+          'Royal London',
+          'Historic Treasures & Theatre',
+          'Royal Castles & Garden Parties'
+        ];
+
+        const londonDayThemes = [
+          'Palaces, guards, and British traditions',
+          'Crown jewels, world museums, and West End magic',
+          'Royal residences and quintessential British experiences'
+        ];
+
         return {
           title: `London Explorer: ${days}-Day Royal & Cultural Adventure`,
           description: 'Discover royal palaces, world-class museums, and quintessential British culture',
-          days: [
-            {
-              day: 1,
-              title: 'Royal London',
-              theme: 'Palaces, guards, and British traditions',
-              activities: [
-                { period: 'morning', time: '09:00', title: 'Buckingham Palace & Changing of Guard', location: 'Westminster', duration: '2 hours', category: 'culture', icon: '👑', cost: 'Free', description: 'Watch the famous ceremony → Explore St. James\'s Park → Royal photo opportunities', tips: 'Arrive early for the best viewing spots, ceremony happens at 11:00 AM' },
-                { period: 'afternoon', time: '13:00', title: 'Westminster Abbey & Big Ben', location: 'Westminster', duration: '2.5 hours', category: 'culture', icon: '⛪', cost: '$25', description: 'Royal wedding venue → Poets\' Corner → Crown Jewels nearby → Thames walk', tips: 'Audio guide included - don\'t miss the Coronation Chair' },
-                { period: 'evening', time: '18:00', title: 'Traditional Pub Experience', location: 'Covent Garden', duration: '2 hours', category: 'food', icon: '🍺', cost: '$40', description: 'Fish & chips → Local ales → Live music → British pub culture', tips: 'Try a proper pint of bitter and don\'t forget mushy peas with your fish & chips' }
-              ]
-            }
-          ]
+          days: Array.from({ length: Math.min(days, 3) }, (_, i) => ({
+            day: i + 1,
+            title: londonDayTitles[i] || `Day ${i + 1} in London`,
+            theme: londonDayThemes[i] || 'Exploring more of London\'s heritage',
+            activities: londonActivities[i] || londonActivities[i % londonActivities.length]
+          }))
         };
       }
       
       // New York Itineraries
       if (destLower.includes('new york') || destLower.includes('nyc') || destLower.includes('manhattan')) {
+        const nycActivities = [
+          // Day 1
+          [
+            { period: 'morning', time: '09:00', title: 'Statue of Liberty & Ellis Island', location: 'Liberty Island', duration: '3 hours', category: 'sightseeing', icon: '🗽', cost: '₹2,000', description: 'Ferry ride → Crown access → Immigration museum → Harbor views', tips: 'Book crown access tickets well in advance - they sell out quickly' },
+            { period: 'afternoon', time: '14:00', title: 'Central Park Exploration', location: 'Central Park', duration: '2 hours', category: 'nature', icon: '🌳', cost: 'Free', description: 'Bethesda Fountain → Bow Bridge → Strawberry Fields → People watching', tips: 'Rent a bike to cover more ground or enjoy a picnic lunch' },
+            { period: 'evening', time: '19:00', title: 'Times Square & Broadway', location: 'Times Square', duration: '2.5 hours', category: 'entertainment', icon: '🎭', cost: '₹6,400', description: 'Bright lights → Street performers → Broadway show → NYC energy', tips: 'Book Broadway shows in advance or try same-day lottery tickets' }
+          ],
+          // Day 2
+          [
+            { period: 'morning', time: '09:00', title: 'Empire State Building & Top of the Rock', location: 'Midtown', duration: '3 hours', category: 'sightseeing', icon: '🏢', cost: '₹3,200', description: 'Iconic skyscraper views → Art Deco architecture → 360° city panorama', tips: 'Visit both for different perspectives, early morning has clearest views' },
+            { period: 'afternoon', time: '14:00', title: 'Metropolitan Museum of Art', location: 'Upper East Side', duration: '2.5 hours', category: 'culture', icon: '🎨', cost: '₹2,000', description: 'World-class art collection → Egyptian wing → American paintings → Rooftop garden', tips: 'Pay-what-you-wish for NY residents, focus on 2-3 wings' },
+            { period: 'evening', time: '19:00', title: 'Little Italy & Chinatown Food Tour', location: 'Lower Manhattan', duration: '2 hours', category: 'food', icon: '🍜', cost: '₹3,600', description: 'Authentic ethnic cuisines → Cultural neighborhoods → Street food sampling', tips: 'Come hungry and try dim sum, cannoli, and pizza' }
+          ],
+          // Day 3
+          [
+            { period: 'morning', time: '09:00', title: 'Brooklyn Bridge & DUMBO', location: 'Brooklyn', duration: '3 hours', category: 'sightseeing', icon: '🌉', cost: 'Free', description: 'Historic bridge walk → Brooklyn Bridge Park → Manhattan skyline views → Artisanal shops', tips: 'Walk the bridge early to avoid crowds, great photo opportunities' },
+            { period: 'afternoon', time: '14:00', title: '9/11 Memorial & One World Trade', location: 'Financial District', duration: '2.5 hours', category: 'culture', icon: '🕊️', cost: '₹2,400', description: 'Moving memorial → One World Observatory → Reflecting pools → Historical significance', tips: 'Reserve timed tickets online, very emotional and meaningful experience' },
+            { period: 'evening', time: '18:00', title: 'High Line & Chelsea Market', location: 'Chelsea', duration: '2 hours', category: 'culture', icon: '🚶', cost: 'Free', description: 'Elevated park → Urban gardens → Food market → Unique NYC experience', tips: 'Perfect for sunset walks and gourmet food sampling' }
+          ]
+        ];
+
+        const nycDayTitles = [
+          'Manhattan Highlights',
+          'Sky-High Views & World-Class Culture',
+          'Bridges, Memorials & Urban Parks'
+        ];
+
+        const nycDayThemes = [
+          'Iconic skylines and urban energy',
+          'Towering perspectives and artistic treasures',
+          'Historic connections and innovative spaces'
+        ];
+
         return {
           title: `New York City: ${days}-Day Urban Adventure`,
           description: 'Experience the city that never sleeps through iconic landmarks and cultural hotspots',
-          days: [
-            {
-              day: 1,
-              title: 'Manhattan Highlights',
-              theme: 'Iconic skylines and urban energy',
-              activities: [
-                { period: 'morning', time: '09:00', title: 'Statue of Liberty & Ellis Island', location: 'Liberty Island', duration: '3 hours', category: 'sightseeing', icon: '🗽', cost: '$25', description: 'Ferry ride → Crown access → Immigration museum → Harbor views', tips: 'Book crown access tickets well in advance - they sell out quickly' },
-                { period: 'afternoon', time: '14:00', title: 'Central Park Exploration', location: 'Central Park', duration: '2 hours', category: 'nature', icon: '🌳', cost: 'Free', description: 'Bethesda Fountain → Bow Bridge → Strawberry Fields → People watching', tips: 'Rent a bike to cover more ground or enjoy a picnic lunch' },
-                { period: 'evening', time: '19:00', title: 'Times Square & Broadway', location: 'Times Square', duration: '2.5 hours', category: 'entertainment', icon: '🎭', cost: '$80', description: 'Bright lights → Street performers → Broadway show → NYC energy', tips: 'Book Broadway shows in advance or try same-day lottery tickets' }
-              ]
-            }
-          ]
+          days: Array.from({ length: Math.min(days, 3) }, (_, i) => ({
+            day: i + 1,
+            title: nycDayTitles[i] || `Day ${i + 1} in NYC`,
+            theme: nycDayThemes[i] || 'Discovering more of the Big Apple',
+            activities: nycActivities[i] || nycActivities[i % nycActivities.length]
+          }))
         };
       }
       
       // Bali Itineraries
       if (destLower.includes('bali') || destLower.includes('indonesia')) {
+        const baliActivities = [
+          // Day 1
+          [
+            { period: 'morning', time: '08:00', title: 'Tegallalang Rice Terraces', location: 'Ubud', duration: '2 hours', category: 'nature', icon: '🌾', cost: '₹800', description: 'Stunning terraced landscapes → Traditional farming → Instagram-worthy photos', tips: 'Visit early morning for best lighting and fewer crowds' },
+            { period: 'afternoon', time: '13:00', title: 'Sacred Monkey Forest & Ubud Palace', location: 'Ubud Center', duration: '2.5 hours', category: 'culture', icon: '🐒', cost: '₹400', description: 'Ancient temple complex → Playful monkeys → Royal palace architecture', tips: 'Keep bags closed - monkeys are very curious about food and shiny objects' },
+            { period: 'evening', time: '18:00', title: 'Traditional Balinese Dinner', location: 'Ubud', duration: '2 hours', category: 'food', icon: '🍛', cost: '₹1,600', description: 'Nasi goreng → Satay → Tropical fruits → Cultural performance', tips: 'Try gado-gado and don\'t miss the traditional kecak fire dance' }
+          ],
+          // Day 2
+          [
+            { period: 'morning', time: '07:00', title: 'Mount Batur Sunrise Trek', location: 'Mount Batur', duration: '4 hours', category: 'adventure', icon: '🌋', cost: '₹2,400', description: 'Early morning hike → Spectacular sunrise → Active volcano → Hot springs', tips: 'Bring warm clothes, starts very early but worth the sunrise views' },
+            { period: 'afternoon', time: '14:00', title: 'Tirta Empul Holy Water Temple', location: 'Tampaksiring', duration: '2 hours', category: 'culture', icon: '💧', cost: '₹400', description: 'Sacred spring temple → Purification ritual → Ancient Balinese traditions', tips: 'Bring sarong and sash, participate respectfully in purification ceremony' },
+            { period: 'evening', time: '18:00', title: 'Ubud Art Market & Spa', location: 'Ubud', duration: '2.5 hours', category: 'relaxation', icon: '🎨', cost: '₹2,000', description: 'Local handicrafts → Traditional Balinese massage → Relaxation after active day', tips: 'Bargain at the market, book spa treatments in advance' }
+          ],
+          // Day 3
+          [
+            { period: 'morning', time: '08:00', title: 'Tanah Lot Temple', location: 'Tabanan', duration: '2.5 hours', category: 'culture', icon: '🏛️', cost: '₹600', description: 'Sea temple on rock formation → Dramatic ocean views → Sunset temple (if staying)', tips: 'Best visited during low tide, famous for sunset photos' },
+            { period: 'afternoon', time: '13:00', title: 'Seminyak Beach & Water Sports', location: 'Seminyak', duration: '3 hours', category: 'beach', icon: '🏄', cost: '₹2,800', description: 'Beautiful beaches → Surfing lessons → Beach clubs → Ocean activities', tips: 'Great for beginners to learn surfing, many beach clubs for relaxation' },
+            { period: 'evening', time: '19:00', title: 'Jimbaran Seafood Dinner', location: 'Jimbaran Bay', duration: '2 hours', category: 'food', icon: '🦞', cost: '₹2,400', description: 'Fresh seafood BBQ → Beachside dining → Romantic sunset → Local fishing village', tips: 'Choose restaurants on the beach for best atmosphere and fresh catch' }
+          ],
+          // Day 4
+          [
+            { period: 'morning', time: '08:00', title: 'Sekumpul Waterfall Trek', location: 'North Bali', duration: '3 hours', category: 'nature', icon: '💦', cost: '₹1,600', description: 'Hidden waterfall → Jungle trekking → Swimming in natural pools → Scenic beauty', tips: 'Wear good hiking shoes, bring swimwear for the natural pools' },
+            { period: 'afternoon', time: '14:00', title: 'Ulun Danu Beratan Temple', location: 'Bedugul', duration: '2 hours', category: 'culture', icon: '🛶', cost: '₹400', description: 'Lake temple → Mountain scenery → Iconic Bali postcard view → Cool mountain air', tips: 'Famous temple on the lake, bring jacket as it\'s cooler in mountains' },
+            { period: 'evening', time: '18:00', title: 'Traditional Balinese Cooking Class', location: 'Ubud', duration: '3 hours', category: 'food', icon: '👨‍🍳', cost: '₹2,000', description: 'Learn local recipes → Market visit → Hands-on cooking → Authentic flavors', tips: 'Great way to learn about Balinese culture through food' }
+          ],
+          // Day 5
+          [
+            { period: 'morning', time: '08:00', title: 'Nusa Penida Day Trip', location: 'Nusa Penida', duration: '6 hours', category: 'adventure', icon: '🏝️', cost: '₹4,000', description: 'Island hopping → Kelingking Beach → Angel\'s Billabong → Crystal Bay snorkeling', tips: 'Full day trip, bring sunscreen and snorkeling gear' },
+            { period: 'evening', time: '19:00', title: 'Farewell Dinner & Cultural Show', location: 'Ubud', duration: '2.5 hours', category: 'culture', icon: '💃', cost: '₹2,800', description: 'Traditional Legong dance → Gamelan music → Farewell feast → Cultural immersion', tips: 'Perfect way to end your Bali journey with traditional arts' }
+          ]
+        ];
+
+        const baliDayTitles = [
+          'Ubud Cultural Immersion',
+          'Volcanic Adventures & Sacred Waters',
+          'Temples & Beach Paradise',
+          'Waterfalls & Mountain Temples',
+          'Island Hopping & Cultural Farewell'
+        ];
+
+        const baliDayThemes = [
+          'Rice terraces, temples, and traditional arts',
+          'Sunrise treks and spiritual purification',
+          'Ocean temples and beach relaxation',
+          'Natural wonders and mountain serenity',
+          'Island exploration and cultural celebration'
+        ];
+
         return {
           title: `Bali Paradise: ${days}-Day Tropical & Cultural Journey`,
           description: 'Discover tropical beaches, ancient temples, and Balinese culture',
-          days: [
-            {
-              day: 1,
-              title: 'Ubud Cultural Immersion',
-              theme: 'Rice terraces, temples, and traditional arts',
-              activities: [
-                { period: 'morning', time: '08:00', title: 'Tegallalang Rice Terraces', location: 'Ubud', duration: '2 hours', category: 'nature', icon: '🌾', cost: '$10', description: 'Stunning terraced landscapes → Traditional farming → Instagram-worthy photos', tips: 'Visit early morning for best lighting and fewer crowds' },
-                { period: 'afternoon', time: '13:00', title: 'Sacred Monkey Forest & Ubud Palace', location: 'Ubud Center', duration: '2.5 hours', category: 'culture', icon: '🐒', cost: '$5', description: 'Ancient temple complex → Playful monkeys → Royal palace architecture', tips: 'Keep bags closed - monkeys are very curious about food and shiny objects' },
-                { period: 'evening', time: '18:00', title: 'Traditional Balinese Dinner', location: 'Ubud', duration: '2 hours', category: 'food', icon: '🍛', cost: '$20', description: 'Nasi goreng → Satay → Tropical fruits → Cultural performance', tips: 'Try gado-gado and don\'t miss the traditional kecak fire dance' }
-              ]
-            }
-          ]
+          days: Array.from({ length: Math.min(days, 5) }, (_, i) => ({
+            day: i + 1,
+            title: baliDayTitles[i] || `Day ${i + 1} in Bali`,
+            theme: baliDayThemes[i] || 'Exploring more of Bali\'s wonders',
+            activities: baliActivities[i] || baliActivities[i % baliActivities.length]
+          }))
         };
       }
       
