@@ -1,42 +1,65 @@
 import React from 'react';
-import { Plus, Sparkles } from 'lucide-react';
-import { useApp } from '../../contexts/AppContext';
+import { MapPin, Calendar, Star, ArrowRight } from 'lucide-react';
 
-const PlanTripCard: React.FC = () => {
-  const { setCurrentView, setPlanningData } = useApp();
-
-  const handlePlanNewTrip = () => {
-    setPlanningData({
-      destination: '',
-      startDate: '',
-      endDate: '',
-      preferences: [],
-      budget: 1000,
-      currentStep: 1
-    });
-    setCurrentView('planning');
-  };
-
+const HeroSection: React.FC = () => {
   return (
-    <div className="mb-12">
-      <div 
-        onClick={handlePlanNewTrip}
-        className="group relative bg-blue-600 hover:bg-blue-700 rounded-2xl p-8 cursor-pointer overflow-hidden transition-colors duration-300"
-      >
-        <div className="relative z-10 text-white">
-          <div className="flex items-center justify-between mb-4">
-            <h2 className="text-xxlarge font-bold font-headline">Plan a New Trip</h2>
-            <div className="p-3 bg-white/20 rounded-lg group-hover:bg-white/30 transition-colors">
-              <Plus className="h-6 w-6" />
+    <section className="text-center py-20 relative overflow-hidden">
+      {/* Subtle background pattern */}
+      <div className="absolute inset-0 bg-gradient-to-br from-slate-50 via-white to-blue-50/30 dark:from-slate-800/50 dark:via-slate-900 dark:to-blue-950/30 rounded-3xl"></div>
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,rgba(59,130,246,0.05),transparent_50%)]"></div>
+      
+      <div className="relative z-10">
+        <div className="mb-6">
+          <span className="inline-block px-4 py-2 bg-blue-50 dark:bg-blue-950/30 text-blue-600 dark:text-blue-400 rounded-full text-sm font-medium mb-6">
+            ✈️ Your Journey Starts Here
+          </span>
+        </div>
+        <h1 className="text-largedisplay font-bold font-headline mb-8 text-slate-900 dark:text-white leading-tight">
+          Plan Your Perfect
+          <br />
+          <span className="bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent">
+            Travel Experience
+          </span>
+        </h1>
+        <p className="text-xl text-slate-600 dark:text-slate-300 mb-12 max-w-3xl mx-auto leading-relaxed">
+          Create personalized itineraries, discover hidden gems, and make every journey unforgettable with our intelligent travel planning platform.
+        </p>
+        
+        {/* CTA Button */}
+        <div className="mb-16">
+          <button className="group inline-flex items-center space-x-3 bg-blue-600 hover:bg-blue-700 text-white px-8 py-4 rounded-2xl font-semibold text-lg transition-all duration-300 hover:shadow-xl hover:shadow-blue-500/25 hover:-translate-y-1">
+            <span>Start Planning Now</span>
+            <ArrowRight className="h-5 w-5 group-hover:translate-x-1 transition-transform" />
+          </button>
+        </div>
+        
+        {/* Stats */}
+        <div className="flex flex-wrap justify-center gap-8 md:gap-16">
+          <div className="text-center">
+            <div className="flex items-center justify-center mb-2">
+              <MapPin className="h-5 w-5 text-blue-600 mr-2" />
+              <span className="text-2xl font-bold text-slate-900 dark:text-white">150+</span>
             </div>
+            <p className="text-sm text-slate-600 dark:text-slate-400">Destinations</p>
           </div>
-          <p className="text-white/90 mb-6 text-large line-height-loose">
-            Let our AI assistant create a personalized itinerary based on your preferences, budget, and travel style.
-          </p>
+          <div className="text-center">
+            <div className="flex items-center justify-center mb-2">
+              <Calendar className="h-5 w-5 text-blue-600 mr-2" />
+              <span className="text-2xl font-bold text-slate-900 dark:text-white">1,200+</span>
+            </div>
+            <p className="text-sm text-slate-600 dark:text-slate-400">Trips Planned</p>
+          </div>
+          <div className="text-center">
+            <div className="flex items-center justify-center mb-2">
+              <Star className="h-5 w-5 text-blue-600 mr-2" />
+              <span className="text-2xl font-bold text-slate-900 dark:text-white">4.8</span>
+            </div>
+            <p className="text-sm text-slate-600 dark:text-slate-400">User Rating</p>
+          </div>
         </div>
       </div>
-    </div>
+    </section>
   );
 };
 
-export default PlanTripCard;
+export default HeroSection;
