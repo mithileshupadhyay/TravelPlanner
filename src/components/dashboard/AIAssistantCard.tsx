@@ -412,7 +412,7 @@ const AIAssistantCard: React.FC = () => {
             </p>
             <p className="text-xs text-gray-500 dark:text-gray-400">
               Complete itinerary with detailed activities, timings, and insider tips
-            </h5>
+            </p>
           </div>
         )}
       </div>
