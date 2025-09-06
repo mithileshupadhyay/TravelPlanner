@@ -1,5 +1,5 @@
 import React from 'react';
-import { Plus, Sparkles } from 'lucide-react';
+import { Plus } from 'lucide-react';
 import { useApp } from '../../contexts/AppContext';
 
 const PlanTripCard: React.FC = () => {
@@ -18,31 +18,20 @@ const PlanTripCard: React.FC = () => {
   };
 
   return (
-    <div className="mb-12">
+    <div className="mb-8">
       <div 
         onClick={handlePlanNewTrip}
-        className="group relative bg-gradient-to-br from-blue-500 via-purple-500 to-pink-500 rounded-3xl p-8 cursor-pointer overflow-hidden hover:scale-[1.02] transition-transform duration-300"
+        className="group bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg p-6 cursor-pointer hover:border-gray-300 dark:hover:border-gray-600 transition-colors"
       >
-        {/* Background pattern */}
-        <div className="absolute inset-0 opacity-10">
-          <div className="absolute top-4 right-4 text-6xl">✈️</div>
-          <div className="absolute bottom-8 left-8 text-4xl">🗺️</div>
-          <div className="absolute top-1/2 right-1/3 text-3xl">🌟</div>
-        </div>
-
-        <div className="relative z-10 text-white">
-          <div className="flex items-center justify-between mb-4">
-            <h2 className="text-xxlarge font-bold font-headline">Plan a New Trip</h2>
-            <div className="p-3 bg-white/20 rounded-xl group-hover:bg-white/30 transition-colors">
-              <Plus className="h-6 w-6" />
-            </div>
+        <div className="flex items-center justify-between">
+          <div>
+            <h2 className="text-xl font-semibold text-gray-900 dark:text-white mb-2">Plan a New Trip</h2>
+            <p className="text-gray-600 dark:text-gray-400">
+              Create a personalized itinerary based on your preferences
+            </p>
           </div>
-          <p className="text-white/90 mb-6 text-large line-height-loose">
-            Let our AI assistant create a personalized itinerary based on your preferences, budget, and travel style.
-          </p>
-          <div className="flex items-center space-x-2 text-white/80">
-            <Sparkles className="h-4 w-4" />
-            <span className="text-sm font-medium">Powered by AI</span>
+          <div className="p-2 bg-gray-100 dark:bg-gray-700 rounded-md group-hover:bg-gray-200 dark:group-hover:bg-gray-600 transition-colors">
+            <Plus className="h-5 w-5 text-gray-600 dark:text-gray-400" />
           </div>
         </div>
       </div>
