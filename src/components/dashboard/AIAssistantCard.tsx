@@ -731,19 +731,22 @@ const AIAssistantCard: React.FC = () => {
   );
 
   return (
-    <div className="bg-gray-50 dark:bg-gray-800 rounded-2xl p-6 shadow-sm border border-gray-200 dark:border-gray-700">
+    <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-sm border border-gray-200 dark:border-gray-700 overflow-hidden">
       {/* Header */}
-      <div className="flex items-center space-x-3 mb-6 pb-4 border-b border-gray-200 dark:border-gray-700">
-        <div className="p-2 bg-blue-600 rounded-lg">
-          <Bot className="h-5 w-5 text-white" />
+      <div className="bg-gradient-to-r from-purple-500 to-pink-600 p-6 text-white">
+        <div className="flex items-center space-x-3 mb-4">
+          <div className="p-2 bg-white/20 rounded-xl">
+            <Bot className="h-6 w-6" />
+          </div>
+          <div>
+            <h3 className="text-xl font-bold font-headline">TravelYatri</h3>
+            <p className="text-purple-100">Your Personal Travel Expert</p>
+          </div>
         </div>
-        <div>
-          <h2 className="text-lg font-semibold text-gray-900 dark:text-gray-100">
-            TravelYatri AI
-          </h2>
-          <p className="text-sm text-gray-600 dark:text-gray-400">
-            Your Personal Travel Expert
-          </p>
+        
+        <div className="flex items-center space-x-2 text-purple-100">
+          <Sparkles className="h-4 w-4" />
+          <span className="text-sm">Instant Itinerary Generation • No Follow-ups Needed</span>
         </div>
       </div>
 
