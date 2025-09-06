@@ -1,65 +1,61 @@
 import React from 'react';
-import { MapPin, Calendar, Star, ArrowRight } from 'lucide-react';
+import { Plus, Sparkles, ArrowRight } from 'lucide-react';
+import { useApp } from '../../contexts/AppContext';
 
-const HeroSection: React.FC = () => {
+const PlanTripCard: React.FC = () => {
+  const { setCurrentView } = useApp();
+
   return (
-    <section className="text-center py-20 relative overflow-hidden">
-      {/* Subtle background pattern */}
-      <div className="absolute inset-0 bg-gradient-to-br from-slate-50 via-white to-blue-50/30 dark:from-slate-800/50 dark:via-slate-900 dark:to-blue-950/30 rounded-3xl"></div>
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,rgba(59,130,246,0.05),transparent_50%)]"></div>
+    <div className="bg-gradient-to-br from-blue-600 to-indigo-700 rounded-2xl p-8 text-white relative overflow-hidden group hover:shadow-2xl hover:shadow-blue-500/25 transition-all duration-300 hover:-translate-y-1">
+      {/* Background Pattern */}
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_30%,rgba(255,255,255,0.1),transparent_50%)]"></div>
+      <div className="absolute top-4 right-4 opacity-20">
+        <Sparkles className="h-16 w-16" />
+      </div>
       
       <div className="relative z-10">
-        <div className="mb-6">
-          <span className="inline-block px-4 py-2 bg-blue-50 dark:bg-blue-950/30 text-blue-600 dark:text-blue-400 rounded-full text-sm font-medium mb-6">
-            ✈️ Your Journey Starts Here
-          </span>
+        <div className="flex items-center space-x-2 mb-4">
+          <div className="p-2 bg-white/20 rounded-lg backdrop-blur-sm">
+            <Plus className="h-5 w-5" />
+          </div>
+          <span className="text-sm font-medium opacity-90">New Trip</span>
         </div>
-        <h1 className="text-largedisplay font-bold font-headline mb-8 text-slate-900 dark:text-white leading-tight">
-          Plan Your Perfect
+        
+        <h3 className="text-xxlarge font-bold font-headline mb-4 leading-tight">
+          Plan Your Next
           <br />
-          <span className="bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent">
-            Travel Experience
-          </span>
-        </h1>
-        <p className="text-xl text-slate-600 dark:text-slate-300 mb-12 max-w-3xl mx-auto leading-relaxed">
-          Create personalized itineraries, discover hidden gems, and make every journey unforgettable with our intelligent travel planning platform.
+          Adventure
+        </h3>
+        
+        <p className="text-blue-100 mb-6 leading-relaxed">
+          Create personalized itineraries with AI assistance. Get recommendations for destinations, activities, and accommodations.
         </p>
         
-        {/* CTA Button */}
-        <div className="mb-16">
-          <button className="group inline-flex items-center space-x-3 bg-blue-600 hover:bg-blue-700 text-white px-8 py-4 rounded-2xl font-semibold text-lg transition-all duration-300 hover:shadow-xl hover:shadow-blue-500/25 hover:-translate-y-1">
-            <span>Start Planning Now</span>
-            <ArrowRight className="h-5 w-5 group-hover:translate-x-1 transition-transform" />
-          </button>
+        <div className="space-y-3 mb-8">
+          <div className="flex items-center space-x-2 text-sm">
+            <div className="w-2 h-2 bg-white rounded-full"></div>
+            <span className="text-blue-100">AI-Powered Recommendations</span>
+          </div>
+          <div className="flex items-center space-x-2 text-sm">
+            <div className="w-2 h-2 bg-white rounded-full"></div>
+            <span className="text-blue-100">Personalized Itineraries</span>
+          </div>
+          <div className="flex items-center space-x-2 text-sm">
+            <div className="w-2 h-2 bg-white rounded-full"></div>
+            <span className="text-blue-100">Budget Optimization</span>
+          </div>
         </div>
         
-        {/* Stats */}
-        <div className="flex flex-wrap justify-center gap-8 md:gap-16">
-          <div className="text-center">
-            <div className="flex items-center justify-center mb-2">
-              <MapPin className="h-5 w-5 text-blue-600 mr-2" />
-              <span className="text-2xl font-bold text-slate-900 dark:text-white">150+</span>
-            </div>
-            <p className="text-sm text-slate-600 dark:text-slate-400">Destinations</p>
-          </div>
-          <div className="text-center">
-            <div className="flex items-center justify-center mb-2">
-              <Calendar className="h-5 w-5 text-blue-600 mr-2" />
-              <span className="text-2xl font-bold text-slate-900 dark:text-white">1,200+</span>
-            </div>
-            <p className="text-sm text-slate-600 dark:text-slate-400">Trips Planned</p>
-          </div>
-          <div className="text-center">
-            <div className="flex items-center justify-center mb-2">
-              <Star className="h-5 w-5 text-blue-600 mr-2" />
-              <span className="text-2xl font-bold text-slate-900 dark:text-white">4.8</span>
-            </div>
-            <p className="text-sm text-slate-600 dark:text-slate-400">User Rating</p>
-          </div>
-        </div>
+        <button
+          onClick={() => setCurrentView('planning')}
+          className="group/btn inline-flex items-center space-x-2 bg-white text-blue-600 px-6 py-3 rounded-xl font-semibold hover:bg-blue-50 transition-all duration-200 hover:shadow-lg"
+        >
+          <span>Start Planning</span>
+          <ArrowRight className="h-4 w-4 group-hover/btn:translate-x-1 transition-transform" />
+        </button>
       </div>
-    </section>
+    </div>
   );
 };
 
-export default HeroSection;
+export default PlanTripCard;
