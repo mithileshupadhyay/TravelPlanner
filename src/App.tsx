@@ -1,17 +1,15 @@
 import React from 'react';
-import { ThemeProvider } from './contexts/ThemeContext';
-import { AppProvider } from './contexts/AppContext';
-import AppRouter from './components/AppRouter';
+import Header from './components/Header';
+import Dashboard from './components/Dashboard';
 
 function App() {
   return (
-    <ThemeProvider>
-      <AppProvider>
-        <div className="min-h-screen bg-gray-50 dark:bg-gray-900 transition-colors duration-300">
-          <AppRouter />
-        </div>
-      </AppProvider>
-    </ThemeProvider>
+    <div className="min-h-screen bg-gray-50">
+      <Header />
+      <main className="flex-1">
+        <Dashboard />
+      </main>
+    </div>
   );
 }
 
